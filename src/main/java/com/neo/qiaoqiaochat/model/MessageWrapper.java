@@ -12,8 +12,16 @@ import java.util.List;
 public class MessageWrapper implements Serializable {
 
     private static final long serialVersionUID = 2399518522645918499L;
+
+    /**
+     * 消息发送者的sessionId
+     */
     private String sessionId;
 
+
+    /**
+     * 消息接收者的sessionId列表
+     */
     private List<String> reSessionIds;
 
     private int source;

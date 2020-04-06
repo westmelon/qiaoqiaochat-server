@@ -40,7 +40,7 @@ public final class QiaoQiaoHua {
      * <code>string textContent = 4;</code>
      * @return The textContent.
      */
-    String getTextContent();
+    java.lang.String getTextContent();
     /**
      * <code>string textContent = 4;</code>
      * @return The bytes for textContent.
@@ -64,7 +64,7 @@ public final class QiaoQiaoHua {
      * <code>string groupId = 7;</code>
      * @return The groupId.
      */
-    String getGroupId();
+    java.lang.String getGroupId();
     /**
      * <code>string groupId = 7;</code>
      * @return The bytes for groupId.
@@ -76,7 +76,7 @@ public final class QiaoQiaoHua {
      * <code>string sender = 8;</code>
      * @return The sender.
      */
-    String getSender();
+    java.lang.String getSender();
     /**
      * <code>string sender = 8;</code>
      * @return The bytes for sender.
@@ -88,7 +88,7 @@ public final class QiaoQiaoHua {
      * <code>string receiver = 9;</code>
      * @return The receiver.
      */
-    String getReceiver();
+    java.lang.String getReceiver();
     /**
      * <code>string receiver = 9;</code>
      * @return The bytes for receiver.
@@ -100,7 +100,7 @@ public final class QiaoQiaoHua {
      * <code>string token = 10;</code>
      * @return The token.
      */
-    String getToken();
+    java.lang.String getToken();
     /**
      * <code>string token = 10;</code>
      * @return The bytes for token.
@@ -112,7 +112,7 @@ public final class QiaoQiaoHua {
      * <code>string appKey = 11;</code>
      * @return The appKey.
      */
-    String getAppKey();
+    java.lang.String getAppKey();
     /**
      * <code>string appKey = 11;</code>
      * @return The bytes for appKey.
@@ -124,7 +124,7 @@ public final class QiaoQiaoHua {
      * <code>string sign = 12;</code>
      * @return The sign.
      */
-    String getSign();
+    java.lang.String getSign();
     /**
      * <code>string sign = 12;</code>
      * @return The bytes for sign.
@@ -142,7 +142,7 @@ public final class QiaoQiaoHua {
      * <code>string clientVersion = 14;</code>
      * @return The clientVersion.
      */
-    String getClientVersion();
+    java.lang.String getClientVersion();
     /**
      * <code>string clientVersion = 14;</code>
      * @return The bytes for clientVersion.
@@ -180,14 +180,14 @@ public final class QiaoQiaoHua {
       clientVersion_ = "";
     }
 
-    @Override
+    @java.lang.Override
     @SuppressWarnings({"unused"})
-    protected Object newInstance(
+    protected java.lang.Object newInstance(
         UnusedPrivateParameter unused) {
       return new Model();
     }
 
-    @Override
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return this.unknownFields;
@@ -198,7 +198,7 @@ public final class QiaoQiaoHua {
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       if (extensionRegistry == null) {
-        throw new NullPointerException();
+        throw new java.lang.NullPointerException();
       }
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -226,7 +226,7 @@ public final class QiaoQiaoHua {
               break;
             }
             case 34: {
-              String s = input.readStringRequireUtf8();
+              java.lang.String s = input.readStringRequireUtf8();
 
               textContent_ = s;
               break;
@@ -242,37 +242,37 @@ public final class QiaoQiaoHua {
               break;
             }
             case 58: {
-              String s = input.readStringRequireUtf8();
+              java.lang.String s = input.readStringRequireUtf8();
 
               groupId_ = s;
               break;
             }
             case 66: {
-              String s = input.readStringRequireUtf8();
+              java.lang.String s = input.readStringRequireUtf8();
 
               sender_ = s;
               break;
             }
             case 74: {
-              String s = input.readStringRequireUtf8();
+              java.lang.String s = input.readStringRequireUtf8();
 
               receiver_ = s;
               break;
             }
             case 82: {
-              String s = input.readStringRequireUtf8();
+              java.lang.String s = input.readStringRequireUtf8();
 
               token_ = s;
               break;
             }
             case 90: {
-              String s = input.readStringRequireUtf8();
+              java.lang.String s = input.readStringRequireUtf8();
 
               appKey_ = s;
               break;
             }
             case 98: {
-              String s = input.readStringRequireUtf8();
+              java.lang.String s = input.readStringRequireUtf8();
 
               sign_ = s;
               break;
@@ -283,7 +283,7 @@ public final class QiaoQiaoHua {
               break;
             }
             case 114: {
-              String s = input.readStringRequireUtf8();
+              java.lang.String s = input.readStringRequireUtf8();
 
               clientVersion_ = s;
               break;
@@ -314,15 +314,15 @@ public final class QiaoQiaoHua {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return QiaoQiaoHua.internal_static_Model_descriptor;
+      return com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.internal_static_Model_descriptor;
     }
 
-    @Override
-    protected FieldAccessorTable
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return QiaoQiaoHua.internal_static_Model_fieldAccessorTable
+      return com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.internal_static_Model_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              Model.class, Builder.class);
+              com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model.class, com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model.Builder.class);
     }
 
     public static final int CMD_FIELD_NUMBER = 1;
@@ -356,19 +356,19 @@ public final class QiaoQiaoHua {
     }
 
     public static final int TEXTCONTENT_FIELD_NUMBER = 4;
-    private volatile Object textContent_;
+    private volatile java.lang.Object textContent_;
     /**
      * <code>string textContent = 4;</code>
      * @return The textContent.
      */
-    public String getTextContent() {
-      Object ref = textContent_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getTextContent() {
+      java.lang.Object ref = textContent_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        java.lang.String s = bs.toStringUtf8();
         textContent_ = s;
         return s;
       }
@@ -379,11 +379,11 @@ public final class QiaoQiaoHua {
      */
     public com.google.protobuf.ByteString
         getTextContentBytes() {
-      Object ref = textContent_;
-      if (ref instanceof String) {
+      java.lang.Object ref = textContent_;
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+                (java.lang.String) ref);
         textContent_ = b;
         return b;
       } else {
@@ -412,19 +412,19 @@ public final class QiaoQiaoHua {
     }
 
     public static final int GROUPID_FIELD_NUMBER = 7;
-    private volatile Object groupId_;
+    private volatile java.lang.Object groupId_;
     /**
      * <code>string groupId = 7;</code>
      * @return The groupId.
      */
-    public String getGroupId() {
-      Object ref = groupId_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getGroupId() {
+      java.lang.Object ref = groupId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        java.lang.String s = bs.toStringUtf8();
         groupId_ = s;
         return s;
       }
@@ -435,11 +435,11 @@ public final class QiaoQiaoHua {
      */
     public com.google.protobuf.ByteString
         getGroupIdBytes() {
-      Object ref = groupId_;
-      if (ref instanceof String) {
+      java.lang.Object ref = groupId_;
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+                (java.lang.String) ref);
         groupId_ = b;
         return b;
       } else {
@@ -448,19 +448,19 @@ public final class QiaoQiaoHua {
     }
 
     public static final int SENDER_FIELD_NUMBER = 8;
-    private volatile Object sender_;
+    private volatile java.lang.Object sender_;
     /**
      * <code>string sender = 8;</code>
      * @return The sender.
      */
-    public String getSender() {
-      Object ref = sender_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getSender() {
+      java.lang.Object ref = sender_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        java.lang.String s = bs.toStringUtf8();
         sender_ = s;
         return s;
       }
@@ -471,11 +471,11 @@ public final class QiaoQiaoHua {
      */
     public com.google.protobuf.ByteString
         getSenderBytes() {
-      Object ref = sender_;
-      if (ref instanceof String) {
+      java.lang.Object ref = sender_;
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+                (java.lang.String) ref);
         sender_ = b;
         return b;
       } else {
@@ -484,19 +484,19 @@ public final class QiaoQiaoHua {
     }
 
     public static final int RECEIVER_FIELD_NUMBER = 9;
-    private volatile Object receiver_;
+    private volatile java.lang.Object receiver_;
     /**
      * <code>string receiver = 9;</code>
      * @return The receiver.
      */
-    public String getReceiver() {
-      Object ref = receiver_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getReceiver() {
+      java.lang.Object ref = receiver_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        java.lang.String s = bs.toStringUtf8();
         receiver_ = s;
         return s;
       }
@@ -507,11 +507,11 @@ public final class QiaoQiaoHua {
      */
     public com.google.protobuf.ByteString
         getReceiverBytes() {
-      Object ref = receiver_;
-      if (ref instanceof String) {
+      java.lang.Object ref = receiver_;
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+                (java.lang.String) ref);
         receiver_ = b;
         return b;
       } else {
@@ -520,19 +520,19 @@ public final class QiaoQiaoHua {
     }
 
     public static final int TOKEN_FIELD_NUMBER = 10;
-    private volatile Object token_;
+    private volatile java.lang.Object token_;
     /**
      * <code>string token = 10;</code>
      * @return The token.
      */
-    public String getToken() {
-      Object ref = token_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getToken() {
+      java.lang.Object ref = token_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        java.lang.String s = bs.toStringUtf8();
         token_ = s;
         return s;
       }
@@ -543,11 +543,11 @@ public final class QiaoQiaoHua {
      */
     public com.google.protobuf.ByteString
         getTokenBytes() {
-      Object ref = token_;
-      if (ref instanceof String) {
+      java.lang.Object ref = token_;
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+                (java.lang.String) ref);
         token_ = b;
         return b;
       } else {
@@ -556,19 +556,19 @@ public final class QiaoQiaoHua {
     }
 
     public static final int APPKEY_FIELD_NUMBER = 11;
-    private volatile Object appKey_;
+    private volatile java.lang.Object appKey_;
     /**
      * <code>string appKey = 11;</code>
      * @return The appKey.
      */
-    public String getAppKey() {
-      Object ref = appKey_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getAppKey() {
+      java.lang.Object ref = appKey_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        java.lang.String s = bs.toStringUtf8();
         appKey_ = s;
         return s;
       }
@@ -579,11 +579,11 @@ public final class QiaoQiaoHua {
      */
     public com.google.protobuf.ByteString
         getAppKeyBytes() {
-      Object ref = appKey_;
-      if (ref instanceof String) {
+      java.lang.Object ref = appKey_;
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+                (java.lang.String) ref);
         appKey_ = b;
         return b;
       } else {
@@ -592,19 +592,19 @@ public final class QiaoQiaoHua {
     }
 
     public static final int SIGN_FIELD_NUMBER = 12;
-    private volatile Object sign_;
+    private volatile java.lang.Object sign_;
     /**
      * <code>string sign = 12;</code>
      * @return The sign.
      */
-    public String getSign() {
-      Object ref = sign_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getSign() {
+      java.lang.Object ref = sign_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        java.lang.String s = bs.toStringUtf8();
         sign_ = s;
         return s;
       }
@@ -615,11 +615,11 @@ public final class QiaoQiaoHua {
      */
     public com.google.protobuf.ByteString
         getSignBytes() {
-      Object ref = sign_;
-      if (ref instanceof String) {
+      java.lang.Object ref = sign_;
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+                (java.lang.String) ref);
         sign_ = b;
         return b;
       } else {
@@ -638,19 +638,19 @@ public final class QiaoQiaoHua {
     }
 
     public static final int CLIENTVERSION_FIELD_NUMBER = 14;
-    private volatile Object clientVersion_;
+    private volatile java.lang.Object clientVersion_;
     /**
      * <code>string clientVersion = 14;</code>
      * @return The clientVersion.
      */
-    public String getClientVersion() {
-      Object ref = clientVersion_;
-      if (ref instanceof String) {
-        return (String) ref;
+    public java.lang.String getClientVersion() {
+      java.lang.Object ref = clientVersion_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
+        java.lang.String s = bs.toStringUtf8();
         clientVersion_ = s;
         return s;
       }
@@ -661,11 +661,11 @@ public final class QiaoQiaoHua {
      */
     public com.google.protobuf.ByteString
         getClientVersionBytes() {
-      Object ref = clientVersion_;
-      if (ref instanceof String) {
+      java.lang.Object ref = clientVersion_;
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
+                (java.lang.String) ref);
         clientVersion_ = b;
         return b;
       } else {
@@ -684,7 +684,7 @@ public final class QiaoQiaoHua {
     }
 
     private byte memoizedIsInitialized = -1;
-    @Override
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -694,7 +694,7 @@ public final class QiaoQiaoHua {
       return true;
     }
 
-    @Override
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (cmd_ != 0) {
@@ -745,7 +745,7 @@ public final class QiaoQiaoHua {
       unknownFields.writeTo(output);
     }
 
-    @Override
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -808,15 +808,15 @@ public final class QiaoQiaoHua {
       return size;
     }
 
-    @Override
-    public boolean equals(final Object obj) {
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof Model)) {
+      if (!(obj instanceof com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model)) {
         return super.equals(obj);
       }
-      Model other = (Model) obj;
+      com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model other = (com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model) obj;
 
       if (getCmd()
           != other.getCmd()) return false;
@@ -852,7 +852,7 @@ public final class QiaoQiaoHua {
       return true;
     }
 
-    @Override
+    @java.lang.Override
     public int hashCode() {
       if (memoizedHashCode != 0) {
         return memoizedHashCode;
@@ -895,69 +895,69 @@ public final class QiaoQiaoHua {
       return hash;
     }
 
-    public static Model parseFrom(
+    public static com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Model parseFrom(
+    public static com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Model parseFrom(
+    public static com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Model parseFrom(
+    public static com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Model parseFrom(byte[] data)
+    public static com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static Model parseFrom(
+    public static com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static Model parseFrom(java.io.InputStream input)
+    public static com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static Model parseFrom(
+    public static com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Model parseDelimitedFrom(java.io.InputStream input)
+    public static com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static Model parseDelimitedFrom(
+    public static com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static Model parseFrom(
+    public static com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static Model parseFrom(
+    public static com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -965,23 +965,23 @@ public final class QiaoQiaoHua {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    @Override
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(Model prototype) {
+    public static Builder newBuilder(com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
-    @Override
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @Override
+    @java.lang.Override
     protected Builder newBuilderForType(
-        BuilderParent parent) {
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -991,18 +991,18 @@ public final class QiaoQiaoHua {
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:Model)
-        ModelOrBuilder {
+        com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.ModelOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return QiaoQiaoHua.internal_static_Model_descriptor;
+        return com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.internal_static_Model_descriptor;
       }
 
-      @Override
-      protected FieldAccessorTable
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return QiaoQiaoHua.internal_static_Model_fieldAccessorTable
+        return com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.internal_static_Model_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                Model.class, Builder.class);
+                com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model.class, com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model.Builder.class);
       }
 
       // Construct using com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model.newBuilder()
@@ -1011,7 +1011,7 @@ public final class QiaoQiaoHua {
       }
 
       private Builder(
-          BuilderParent parent) {
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -1020,7 +1020,7 @@ public final class QiaoQiaoHua {
                 .alwaysUseFieldBuilders) {
         }
       }
-      @Override
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         cmd_ = 0;
@@ -1056,29 +1056,29 @@ public final class QiaoQiaoHua {
         return this;
       }
 
-      @Override
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return QiaoQiaoHua.internal_static_Model_descriptor;
+        return com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.internal_static_Model_descriptor;
       }
 
-      @Override
-      public Model getDefaultInstanceForType() {
-        return Model.getDefaultInstance();
+      @java.lang.Override
+      public com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model getDefaultInstanceForType() {
+        return com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model.getDefaultInstance();
       }
 
-      @Override
-      public Model build() {
-        Model result = buildPartial();
+      @java.lang.Override
+      public com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model build() {
+        com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      @Override
-      public Model buildPartial() {
-        Model result = new Model(this);
+      @java.lang.Override
+      public com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model buildPartial() {
+        com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model result = new com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model(this);
         result.cmd_ = cmd_;
         result.msgType_ = msgType_;
         result.timestamp_ = timestamp_;
@@ -1098,50 +1098,50 @@ public final class QiaoQiaoHua {
         return result;
       }
 
-      @Override
+      @java.lang.Override
       public Builder clone() {
         return super.clone();
       }
-      @Override
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return super.setField(field, value);
       }
-      @Override
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return super.clearField(field);
       }
-      @Override
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return super.clearOneof(oneof);
       }
-      @Override
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return super.setRepeatedField(field, index, value);
       }
-      @Override
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return super.addRepeatedField(field, value);
       }
-      @Override
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof Model) {
-          return mergeFrom((Model)other);
+        if (other instanceof com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model) {
+          return mergeFrom((com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(Model other) {
-        if (other == Model.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model other) {
+        if (other == com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model.getDefaultInstance()) return this;
         if (other.getCmd() != 0) {
           setCmd(other.getCmd());
         }
@@ -1200,21 +1200,21 @@ public final class QiaoQiaoHua {
         return this;
       }
 
-      @Override
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
-      @Override
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        Model parsedMessage = null;
+        com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (Model) e.getUnfinishedMessage();
+          parsedMessage = (com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -1314,21 +1314,21 @@ public final class QiaoQiaoHua {
         return this;
       }
 
-      private Object textContent_ = "";
+      private java.lang.Object textContent_ = "";
       /**
        * <code>string textContent = 4;</code>
        * @return The textContent.
        */
-      public String getTextContent() {
-        Object ref = textContent_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getTextContent() {
+        java.lang.Object ref = textContent_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+          java.lang.String s = bs.toStringUtf8();
           textContent_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
@@ -1337,11 +1337,11 @@ public final class QiaoQiaoHua {
        */
       public com.google.protobuf.ByteString
           getTextContentBytes() {
-        Object ref = textContent_;
+        java.lang.Object ref = textContent_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+                  (java.lang.String) ref);
           textContent_ = b;
           return b;
         } else {
@@ -1354,7 +1354,7 @@ public final class QiaoQiaoHua {
        * @return This builder for chaining.
        */
       public Builder setTextContent(
-          String value) {
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -1453,21 +1453,21 @@ public final class QiaoQiaoHua {
         return this;
       }
 
-      private Object groupId_ = "";
+      private java.lang.Object groupId_ = "";
       /**
        * <code>string groupId = 7;</code>
        * @return The groupId.
        */
-      public String getGroupId() {
-        Object ref = groupId_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getGroupId() {
+        java.lang.Object ref = groupId_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+          java.lang.String s = bs.toStringUtf8();
           groupId_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
@@ -1476,11 +1476,11 @@ public final class QiaoQiaoHua {
        */
       public com.google.protobuf.ByteString
           getGroupIdBytes() {
-        Object ref = groupId_;
+        java.lang.Object ref = groupId_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+                  (java.lang.String) ref);
           groupId_ = b;
           return b;
         } else {
@@ -1493,7 +1493,7 @@ public final class QiaoQiaoHua {
        * @return This builder for chaining.
        */
       public Builder setGroupId(
-          String value) {
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -1529,21 +1529,21 @@ public final class QiaoQiaoHua {
         return this;
       }
 
-      private Object sender_ = "";
+      private java.lang.Object sender_ = "";
       /**
        * <code>string sender = 8;</code>
        * @return The sender.
        */
-      public String getSender() {
-        Object ref = sender_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getSender() {
+        java.lang.Object ref = sender_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+          java.lang.String s = bs.toStringUtf8();
           sender_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
@@ -1552,11 +1552,11 @@ public final class QiaoQiaoHua {
        */
       public com.google.protobuf.ByteString
           getSenderBytes() {
-        Object ref = sender_;
+        java.lang.Object ref = sender_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+                  (java.lang.String) ref);
           sender_ = b;
           return b;
         } else {
@@ -1569,7 +1569,7 @@ public final class QiaoQiaoHua {
        * @return This builder for chaining.
        */
       public Builder setSender(
-          String value) {
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -1605,21 +1605,21 @@ public final class QiaoQiaoHua {
         return this;
       }
 
-      private Object receiver_ = "";
+      private java.lang.Object receiver_ = "";
       /**
        * <code>string receiver = 9;</code>
        * @return The receiver.
        */
-      public String getReceiver() {
-        Object ref = receiver_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getReceiver() {
+        java.lang.Object ref = receiver_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+          java.lang.String s = bs.toStringUtf8();
           receiver_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
@@ -1628,11 +1628,11 @@ public final class QiaoQiaoHua {
        */
       public com.google.protobuf.ByteString
           getReceiverBytes() {
-        Object ref = receiver_;
+        java.lang.Object ref = receiver_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+                  (java.lang.String) ref);
           receiver_ = b;
           return b;
         } else {
@@ -1645,7 +1645,7 @@ public final class QiaoQiaoHua {
        * @return This builder for chaining.
        */
       public Builder setReceiver(
-          String value) {
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -1681,21 +1681,21 @@ public final class QiaoQiaoHua {
         return this;
       }
 
-      private Object token_ = "";
+      private java.lang.Object token_ = "";
       /**
        * <code>string token = 10;</code>
        * @return The token.
        */
-      public String getToken() {
-        Object ref = token_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getToken() {
+        java.lang.Object ref = token_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+          java.lang.String s = bs.toStringUtf8();
           token_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
@@ -1704,11 +1704,11 @@ public final class QiaoQiaoHua {
        */
       public com.google.protobuf.ByteString
           getTokenBytes() {
-        Object ref = token_;
+        java.lang.Object ref = token_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+                  (java.lang.String) ref);
           token_ = b;
           return b;
         } else {
@@ -1721,7 +1721,7 @@ public final class QiaoQiaoHua {
        * @return This builder for chaining.
        */
       public Builder setToken(
-          String value) {
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -1757,21 +1757,21 @@ public final class QiaoQiaoHua {
         return this;
       }
 
-      private Object appKey_ = "";
+      private java.lang.Object appKey_ = "";
       /**
        * <code>string appKey = 11;</code>
        * @return The appKey.
        */
-      public String getAppKey() {
-        Object ref = appKey_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getAppKey() {
+        java.lang.Object ref = appKey_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+          java.lang.String s = bs.toStringUtf8();
           appKey_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
@@ -1780,11 +1780,11 @@ public final class QiaoQiaoHua {
        */
       public com.google.protobuf.ByteString
           getAppKeyBytes() {
-        Object ref = appKey_;
+        java.lang.Object ref = appKey_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+                  (java.lang.String) ref);
           appKey_ = b;
           return b;
         } else {
@@ -1797,7 +1797,7 @@ public final class QiaoQiaoHua {
        * @return This builder for chaining.
        */
       public Builder setAppKey(
-          String value) {
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -1833,21 +1833,21 @@ public final class QiaoQiaoHua {
         return this;
       }
 
-      private Object sign_ = "";
+      private java.lang.Object sign_ = "";
       /**
        * <code>string sign = 12;</code>
        * @return The sign.
        */
-      public String getSign() {
-        Object ref = sign_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getSign() {
+        java.lang.Object ref = sign_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+          java.lang.String s = bs.toStringUtf8();
           sign_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
@@ -1856,11 +1856,11 @@ public final class QiaoQiaoHua {
        */
       public com.google.protobuf.ByteString
           getSignBytes() {
-        Object ref = sign_;
+        java.lang.Object ref = sign_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+                  (java.lang.String) ref);
           sign_ = b;
           return b;
         } else {
@@ -1873,7 +1873,7 @@ public final class QiaoQiaoHua {
        * @return This builder for chaining.
        */
       public Builder setSign(
-          String value) {
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -1939,21 +1939,21 @@ public final class QiaoQiaoHua {
         return this;
       }
 
-      private Object clientVersion_ = "";
+      private java.lang.Object clientVersion_ = "";
       /**
        * <code>string clientVersion = 14;</code>
        * @return The clientVersion.
        */
-      public String getClientVersion() {
-        Object ref = clientVersion_;
-        if (!(ref instanceof String)) {
+      public java.lang.String getClientVersion() {
+        java.lang.Object ref = clientVersion_;
+        if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
+          java.lang.String s = bs.toStringUtf8();
           clientVersion_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
       /**
@@ -1962,11 +1962,11 @@ public final class QiaoQiaoHua {
        */
       public com.google.protobuf.ByteString
           getClientVersionBytes() {
-        Object ref = clientVersion_;
+        java.lang.Object ref = clientVersion_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (String) ref);
+                  (java.lang.String) ref);
           clientVersion_ = b;
           return b;
         } else {
@@ -1979,7 +1979,7 @@ public final class QiaoQiaoHua {
        * @return This builder for chaining.
        */
       public Builder setClientVersion(
-          String value) {
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -2044,13 +2044,13 @@ public final class QiaoQiaoHua {
         onChanged();
         return this;
       }
-      @Override
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
-      @Override
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -2061,18 +2061,18 @@ public final class QiaoQiaoHua {
     }
 
     // @@protoc_insertion_point(class_scope:Model)
-    private static final Model DEFAULT_INSTANCE;
+    private static final com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new Model();
+      DEFAULT_INSTANCE = new com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model();
     }
 
-    public static Model getDefaultInstance() {
+    public static com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
     private static final com.google.protobuf.Parser<Model>
         PARSER = new com.google.protobuf.AbstractParser<Model>() {
-      @Override
+      @java.lang.Override
       public Model parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -2085,13 +2085,13 @@ public final class QiaoQiaoHua {
       return PARSER;
     }
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Parser<Model> getParserForType() {
       return PARSER;
     }
 
-    @Override
-    public Model getDefaultInstanceForType() {
+    @java.lang.Override
+    public com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua.Model getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -2110,7 +2110,7 @@ public final class QiaoQiaoHua {
   private static  com.google.protobuf.Descriptors.FileDescriptor
       descriptor;
   static {
-    String[] descriptorData = {
+    java.lang.String[] descriptorData = {
       "\n\027proto/qiaoqiaohua.proto\"\231\002\n\005Model\022\013\n\003c" +
       "md\030\001 \001(\r\022\017\n\007msgType\030\002 \001(\r\022\021\n\ttimestamp\030\003" +
       " \001(\004\022\023\n\013textContent\030\004 \001(\t\022\021\n\tmediaType\030\005" +
@@ -2131,7 +2131,7 @@ public final class QiaoQiaoHua {
     internal_static_Model_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Model_descriptor,
-        new String[] { "Cmd", "MsgType", "Timestamp", "TextContent", "MediaType", "MediaContent", "GroupId", "Sender", "Receiver", "Token", "AppKey", "Sign", "ClientType", "ClientVersion", "EncryptionType", });
+        new java.lang.String[] { "Cmd", "MsgType", "Timestamp", "TextContent", "MediaType", "MediaContent", "GroupId", "Sender", "Receiver", "Token", "AppKey", "Sign", "ClientType", "ClientVersion", "EncryptionType", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

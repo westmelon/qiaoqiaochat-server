@@ -1,5 +1,10 @@
 package com.neo.qiaoqiaochat.model;
 
+/**
+ * restful api 返回对象
+ * @author Neo Lin
+ * @date  2020/4/5
+ */
 public class SimpleResult<T> {
 
     private int code;
@@ -7,6 +12,11 @@ public class SimpleResult<T> {
     private String message;
 
     private T data;
+
+    public SimpleResult() {
+        this.code = ResultCode.SUCCESS.getCode();
+        this.message = ResultCode.SUCCESS.getMsg();
+    }
 
     public int getCode() {
         return code;
@@ -30,5 +40,10 @@ public class SimpleResult<T> {
 
     public void setData(T data) {
         this.data = data;
+    }
+
+    public void setResultCode(ResultCode resultCode){
+        this.code = resultCode.getCode();
+        this.message = resultCode.getMsg();
     }
 }

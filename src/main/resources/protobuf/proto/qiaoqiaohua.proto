@@ -21,4 +21,5 @@ message Model {
 
   uint32 clientType = 13;
   string clientVersion = 14;
+  uint32 encryptionType = 15;
 }

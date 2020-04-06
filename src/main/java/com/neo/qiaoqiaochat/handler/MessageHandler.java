@@ -9,10 +9,8 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
-import com.neo.qiaoqiaochat.model.Message;
 import com.neo.qiaoqiaochat.model.QiaoqiaoConst;
-import com.neo.qiaoqiaochat.session.Session;
-import com.neo.qiaoqiaochat.session.SessionManager;
+import com.neo.qiaoqiaochat.session.NettySessionManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +21,7 @@ import org.springframework.stereotype.Component;
 public class MessageHandler extends ChannelInboundHandlerAdapter {
     private final static Logger logger = LoggerFactory.getLogger(MessageHandler.class);
     @Autowired
-    private SessionManager sessionManager;
+    private NettySessionManager nettySessionManager;
     @Autowired
     private MessageProxy messageProxy;
     @Autowired

@@ -26,12 +26,13 @@ public class QiaoqiaoConst {
     }
 
     public static interface CommandLine{
-        public static final int BIND = 0;
+        public static final int CONNECT = 0;
         public static final int CLOSE = 1;
         public static final int HEARTBEAT = 2;
         public static final int ONLINE = 3;
         public static final int OFFLINE = 4;
         public static final int MESSAGE = 5;
+
     }
 
     public static interface MessageType {
@@ -40,5 +41,15 @@ public class QiaoqiaoConst {
         public static final int NOTIFY = 2;
         public static final int NOTIFY_REPLY = 3;
 
+    }
+
+    public static interface ShiroConfig {
+        public static final String SALT = "2020520";
+        public static final String USER_INFO = "ui";
+    }
+
+    public static interface RedisCacheConfig {
+        public static final String NETTY_SESSION_NAMESPACE = "netty-session";
+        public static final String ACCOUNT_TOKEN = "mi-token";
     }
 }

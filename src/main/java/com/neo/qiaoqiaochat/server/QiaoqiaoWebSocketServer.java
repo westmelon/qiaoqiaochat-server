@@ -131,9 +131,9 @@ public class QiaoqiaoWebSocketServer {
                     }
                 }
             });
-            future.channel().closeFuture().sync();
+//            future.channel().closeFuture().sync();
         } finally {
-            group.shutdownGracefully().sync();
+//            group.shutdownGracefully().sync();
         }
     }
 }

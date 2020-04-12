@@ -2,6 +2,7 @@ package com.neo.qiaoqiaochat.proxy.impl;
 
 import com.neo.qiaoqiaochat.model.MessageWrapper;
 import com.neo.qiaoqiaochat.model.QiaoqiaoConst;
+import com.neo.qiaoqiaochat.model.emun.MiCommand;
 import com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua;
 import com.neo.qiaoqiaochat.proxy.MessageProxy;
 import com.neo.qiaoqiaochat.session.NettySessionManager;
@@ -21,21 +22,25 @@ public class MessageProxyImpl implements MessageProxy {
     @Override
     public MessageWrapper createMessageWapper(String sessionId, QiaoQiaoHua.Model qiaoqiaohua) {
         int cmd = qiaoqiaohua.getCmd();
-        switch (cmd) {
-            case QiaoqiaoConst.CommandLine.CONNECT:
+        MiCommand miCommand = MiCommand.getEnumByCode(cmd);
+        if(miCommand == null){
+            return null;
+        }
+        switch (miCommand) {
+            case CONNECT:
                 //首次连接时候生成SessionId
                 //TODO
                 String sessionId0 = UUID.randomUUID().toString();
                 return new MessageWrapper(MessageWrapper.MessageProtocol.CONNECT, sessionId0, "", qiaoqiaohua);
-            case QiaoqiaoConst.CommandLine.CLOSE:
+            case CLOSE:
                 return null;
-            case QiaoqiaoConst.CommandLine.HEARTBEAT:
+            case HEARTBEAT:
                 return new MessageWrapper(MessageWrapper.MessageProtocol.HEARTBEAT, sessionId, "", qiaoqiaohua);
-            case QiaoqiaoConst.CommandLine.ONLINE:
+            case ONLINE:
                 break;
-            case QiaoqiaoConst.CommandLine.OFFLINE:
+            case OFFLINE:
                 break;
-            case QiaoqiaoConst.CommandLine.MESSAGE:
+            case MESSAGE:
                 //
                 int msgType = qiaoqiaohua.getMsgType();
                 String receiver = qiaoqiaohua.getReceiver();

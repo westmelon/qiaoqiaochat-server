@@ -25,6 +25,11 @@ public class SessionProxy {
     }
 
 
+    /**
+     * 向所有session列表发送消息 todo 可能阻塞
+     * @param msg
+     * @return
+     */
     public boolean write(Object msg) {
         boolean hasSuccess = false;
         for(Session session : sessions){
@@ -37,8 +42,22 @@ public class SessionProxy {
         return hasSuccess;
     }
 
-    //判断channel是否在线
-    public boolean isConnect(Session session) {
+    //关闭session
+    public void close(){
+        for(Session session : sessions){
+            if (isConnect(session)) {
+                session.getChannel().close();
+            }
+        }
+    }
+
+
+    /**
+     * 判断channel是否在线
+     * @param session
+     * @return
+     */
+    private boolean isConnect(Session session) {
         if (session != null && session.getChannel() != null) {
             return session.getChannel().isActive();
         }

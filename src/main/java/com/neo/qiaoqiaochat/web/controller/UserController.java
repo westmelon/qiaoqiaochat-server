@@ -1,4 +1,4 @@
-package com.neo.qiaoqiaochat.controller;
+package com.neo.qiaoqiaochat.web.controller;
 
 import com.neo.commons.utils.BaseController;
 import com.neo.qiaoqiaochat.model.SimpleResult;
@@ -42,6 +42,8 @@ public class UserController extends BaseController {
         userService.userRegister(dto);
         return new SimpleResult();
     }
+
+    //添加好友
 
     /**
      * test

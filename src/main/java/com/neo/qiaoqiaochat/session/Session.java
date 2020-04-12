@@ -14,7 +14,7 @@ public class Session implements Serializable {
 
     private ClientInfo clientInfo;
 
-    private Channel channel;
+    private transient Channel channel;
 
     private Long createSessionTime;
 

@@ -113,8 +113,8 @@ public class QiaoqiaoWebSocketServer {
                                 }
                             });
                             pipeline.addLast("decoder", decoder);
-                            pipeline.addLast(new IdleStateHandler(QiaoqiaoConst.ServerConfig.READ_IDLE_TIMEOUT,
-                                    QiaoqiaoConst.ServerConfig.WRITE_IDLE_TIMEOUT, QiaoqiaoConst.ServerConfig.ALL_IDLE_TIMEOUT));
+//                            pipeline.addLast(new IdleStateHandler(QiaoqiaoConst.ServerConfig.READ_IDLE_TIMEOUT,
+//                                    QiaoqiaoConst.ServerConfig.WRITE_IDLE_TIMEOUT, QiaoqiaoConst.ServerConfig.ALL_IDLE_TIMEOUT));
                             pipeline.addLast(webSocketHandler);
 //                            pipeline.addLast(new TextWebSocketFrameHandler());
                         }
@@ -122,13 +122,11 @@ public class QiaoqiaoWebSocketServer {
             // 可选参数
             bootstrap.childOption(ChannelOption.TCP_NODELAY, true);
             ChannelFuture future = bootstrap.bind().sync();
-            future.addListener(new ChannelFutureListener() {
-                public void operationComplete(ChannelFuture future) throws Exception {
-                    if (future.isSuccess()) {
-                        logger.info("websocketserver have success bind to " + port);
-                    } else {
-                        logger.error("websocketserver fail bind to " + port);
-                    }
+            future.addListener((ChannelFutureListener) future1 -> {
+                if (future1.isSuccess()) {
+                    logger.info("websocketserver have success bind to " + port);
+                } else {
+                    logger.error("websocketserver fail bind to " + port);
                 }
             });
 //            future.channel().closeFuture().sync();

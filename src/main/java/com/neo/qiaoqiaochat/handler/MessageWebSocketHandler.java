@@ -9,6 +9,8 @@ import com.neo.qiaoqiaochat.session.NettySessionManager;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.handler.timeout.IdleState;
+import io.netty.handler.timeout.IdleStateEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,35 @@ public class MessageWebSocketHandler extends SimpleChannelInboundHandler<QiaoQia
     @Autowired
     private QConnector qConnector;
 
+    /**
+     * 当客户端不再发送心跳包时触发事件
+     * @param ctx
+     * @param evt
+     * @throws Exception
+     */
+    @Override
+    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+        //获取sessionId
+        String sessionId = ctx.channel().attr(QiaoqiaoConst.SessionConfig.SERVER_SESSION_ID).get();
+        //当服务端一段时间没有向客户端发送消息时 向客户端发送心跳包
+        if (evt instanceof IdleStateEvent && ((IdleStateEvent) evt).state().equals(IdleState.WRITER_IDLE)) {
+            qConnector.heartbeatToClient(ctx);
+        }
+
+        //当服务端一段时间内没有接受到客户端的反馈消息时
+        if (evt instanceof IdleStateEvent && ((IdleStateEvent) evt).state().equals(IdleState.READER_IDLE)) {
+
+            Long lastHeartBeat = ctx.channel().attr(QiaoqiaoConst.SessionConfig.SERVER_SESSION_HEARTBEAT).get();
+
+            long currentTimeMillis = System.currentTimeMillis();
+
+            if (lastHeartBeat == null || (currentTimeMillis - lastHeartBeat) / 1000 > QiaoqiaoConst.ServerConfig.SERVER_CONNET_TIMEOUT) {
+                //关闭session 移除缓存
+                logger.info("close session");
+                qConnector.close(ctx);
+            }
+        }
+    }
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, QiaoQiaoHua.Model model) throws Exception {
@@ -65,12 +96,12 @@ public class MessageWebSocketHandler extends SimpleChannelInboundHandler<QiaoQia
     private void receiveMessages(ChannelHandlerContext hander, MessageWrapper wrapper) {
         //设置消息来源为socket
         wrapper.setSource(QiaoqiaoConst.ServerConfig.SOCKET);
-        if (wrapper.isConnect()) {  //兼具登录功能
+        if (wrapper.isConnect()) {
             qConnector.connect(hander, wrapper);
         } else if (wrapper.isClose()) {
             qConnector.close(hander);
         } else if (wrapper.isHeartbeat()) {
-            qConnector.heartbeatToClient(hander, wrapper);
+            qConnector.heartbeatFromClient(hander, wrapper);
         } else if (wrapper.isGroup()) {
             qConnector.pushGroupMessage(wrapper);
         } else if (wrapper.isSend()) {

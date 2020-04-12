@@ -19,6 +19,10 @@ public class InitApp {
 
     public void init() {
         //初始化缓存
+        cacheManager.getCache(QiaoqiaoConst.RedisCacheConfig.NETTY_SESSION_NAMESPACE, 3600);
+        cacheManager.getCache(QiaoqiaoConst.RedisCacheConfig.ACCOUNT_SESSIONIDS, 3600);
         cacheManager.getCache(QiaoqiaoConst.RedisCacheConfig.ACCOUNT_TOKEN, 3600);
+
+
     }
 }

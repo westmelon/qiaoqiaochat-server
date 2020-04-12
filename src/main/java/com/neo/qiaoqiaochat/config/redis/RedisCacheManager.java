@@ -21,7 +21,7 @@ public class RedisCacheManager implements CacheManager {
 
     private static String nameSpace = "pikachu";
     @Autowired
-    @Qualifier(value = "defaultRedisTemplate")
+    @Qualifier(value = "sessionRedisTemplate")
     private RedisTemplate<String, Object> redisTemplate;
     @Autowired
     private ShiroCacheProperties shiroCacheProperties;

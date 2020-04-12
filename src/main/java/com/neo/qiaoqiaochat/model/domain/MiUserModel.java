@@ -33,9 +33,6 @@ public class MiUserModel implements Serializable {
 
     private String password;
 
-    @Column(name = "last_login_time")
-    private Date lastLoginTime;
-
     /**
      * 创建账户时间
      */
@@ -164,20 +161,6 @@ public class MiUserModel implements Serializable {
     }
 
     /**
-     * @return last_login_time
-     */
-    public Date getLastLoginTime() {
-        return lastLoginTime;
-    }
-
-    /**
-     * @param lastLoginTime
-     */
-    public void setLastLoginTime(Date lastLoginTime) {
-        this.lastLoginTime = lastLoginTime;
-    }
-
-    /**
      * 获取创建账户时间
      *
      * @return crtime - 创建账户时间
@@ -209,7 +192,6 @@ public class MiUserModel implements Serializable {
         sb.append(", introduce=").append(introduce);
         sb.append(", headImageIndex=").append(headImageIndex);
         sb.append(", password=").append(password);
-        sb.append(", lastLoginTime=").append(lastLoginTime);
         sb.append(", crtime=").append(crtime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

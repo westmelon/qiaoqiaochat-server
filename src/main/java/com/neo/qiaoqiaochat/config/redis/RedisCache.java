@@ -51,13 +51,21 @@ public class RedisCache<K, V> implements Cache<K, V> {
     public Collection<V> values() {
         Set<K> set = this.keys();
         List<V> list = new ArrayList();
-        Iterator<K> iterator = set.iterator();
 
-        while(iterator.hasNext()) {
-            K s = iterator.next();
+        for (K s : set) {
             list.add(this.get(s));
         }
         return list;
+    }
+
+    public Map<K, V> mapValues() {
+        Set<K> set = this.keys();
+        Map<K, V> map  = new HashMap<>();
+
+        for (K s : set) {
+            map.put(s, this.get(s));
+        }
+        return map;
     }
 
     private K getCacheKey(Object k) {

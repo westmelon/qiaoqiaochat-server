@@ -25,15 +25,7 @@ public class QiaoqiaoConst {
 
     }
 
-    public static interface CommandLine{
-        public static final int CONNECT = 0;
-        public static final int CLOSE = 1;
-        public static final int HEARTBEAT = 2;
-        public static final int ONLINE = 3;
-        public static final int OFFLINE = 4;
-        public static final int MESSAGE = 5;
 
-    }
 
     public static interface MessageType {
         public static final int SEND = 0;
@@ -50,6 +42,7 @@ public class QiaoqiaoConst {
 
     public static interface RedisCacheConfig {
         public static final String NETTY_SESSION_NAMESPACE = "netty-session";
+        public static final String ACCOUNT_SESSIONIDS = "account-session-ids";
         public static final String ACCOUNT_TOKEN = "mi-token";
     }
 }

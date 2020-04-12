@@ -5,8 +5,20 @@ import io.netty.channel.ChannelHandlerContext;
 
 public interface QConnector {
 
-    //发送心跳检测
-    void heartbeatToClient(ChannelHandlerContext hander, MessageWrapper wrapper);
+
+    /**
+     * 接受客户端的心跳包 刷新时间
+     * @param hander
+     * @param wrapper
+     */
+    void heartbeatFromClient(ChannelHandlerContext hander, MessageWrapper wrapper);
+
+
+    /**
+     * 向连接的客户端发送心跳包
+     * @param hander
+     */
+    void heartbeatToClient(ChannelHandlerContext hander);
 
     //发送消息（消息回传）
     void pushMessage(MessageWrapper wrapper) throws RuntimeException;

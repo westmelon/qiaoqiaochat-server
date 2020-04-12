@@ -27,7 +27,7 @@ public class RedisObjectSerializer implements RedisSerializer<Object> {
     }
 
     public byte[] serialize(Object object) {
-        if (object == null) {
+         if (object == null) {
             return EMPTY_ARRAY;
         } else {
             try {

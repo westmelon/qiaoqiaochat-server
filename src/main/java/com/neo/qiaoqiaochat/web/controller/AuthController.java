@@ -1,4 +1,4 @@
-package com.neo.qiaoqiaochat.controller;
+package com.neo.qiaoqiaochat.web.controller;
 
 
 import com.neo.commons.utils.BaseController;

@@ -2,6 +2,7 @@ package com.neo.qiaoqiaochat.connector;
 
 import com.neo.qiaoqiaochat.model.MessageWrapper;
 import com.neo.qiaoqiaochat.model.QiaoqiaoConst;
+import com.neo.qiaoqiaochat.model.emun.MiCommand;
 import com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua;
 import com.neo.qiaoqiaochat.proxy.MessageFactory;
 import com.neo.qiaoqiaochat.proxy.MessageProxy;
@@ -33,10 +34,21 @@ public class QiaoConnector implements QConnector {
     private AuthService authService;
 
     @Override
-    public void heartbeatToClient(ChannelHandlerContext hander, MessageWrapper wrapper) {
+    public void heartbeatFromClient(ChannelHandlerContext ctx, MessageWrapper wrapper) {
         //接受到客户端消息后 刷新心跳最新时间
-        hander.channel().attr(AttributeKey.valueOf(QiaoqiaoConst.SessionConfig.HEARTBEAT_KEY)).set(System.currentTimeMillis());
+        ctx.channel().attr(AttributeKey.valueOf(QiaoqiaoConst.SessionConfig.HEARTBEAT_KEY)).set(System.currentTimeMillis());
     }
+
+    @Override
+    public void heartbeatToClient(ChannelHandlerContext ctx) {
+        MessageWrapper serverMessage = MessageFactory.createServerMessage(ctx, MiCommand.HEARTBEAT);
+        //TODO 去除冗余代码
+        List<String> reSessionIds = serverMessage.getReSessionIds();
+        List<Session> sessions = nettySessionManager.getSessions(reSessionIds);
+        SessionProxy proxy = new SessionProxy(sessions);
+        boolean writeSuccess = proxy.write(serverMessage.getBody());
+    }
+
 
     @Override
     public void pushMessage(MessageWrapper wrapper) throws RuntimeException {

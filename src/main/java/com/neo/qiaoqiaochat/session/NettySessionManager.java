@@ -41,6 +41,9 @@ public class NettySessionManager {
 
     /**
      * 添加netty session
+     *
+     * @param sessionId the session id
+     * @param session   the session
      */
     public synchronized void addSession(String sessionId, Session session) {
         sessionCache.put(sessionId, session);
@@ -49,6 +52,9 @@ public class NettySessionManager {
 
     /**
      * 查找netty session
+     *
+     * @param sessionId the session id
+     * @return the session
      */
     public Session getSession(String sessionId) {
         return sessionCache.get(sessionId);
@@ -56,6 +62,8 @@ public class NettySessionManager {
 
     /**
      * 移除netty session
+     *
+     * @param sessionId the session id
      */
     public void removeSession(String sessionId) {
         Session session = getSession(sessionId);
@@ -81,6 +89,9 @@ public class NettySessionManager {
 
     /**
      * 根据sessionId列表查找netty session列表
+     *
+     * @param sessionIds the session ids
+     * @return the sessions
      */
     public List<Session> getSessions(List<String> sessionIds) {
         List<Session> sessions = new ArrayList<>();
@@ -109,6 +120,9 @@ public class NettySessionManager {
 
     /**
      * 根据账号查找用户netty sessionIds
+     *
+     * @param account 账号
+     * @return 账号的session列表
      */
     public List<String> getSessionIdsByAccount(String account) {
         Set<String> userSessions = accountSessionIdsCache.get(account);
@@ -117,6 +131,9 @@ public class NettySessionManager {
 
     /**
      * 绑定账号和session列表 同步处理
+     *
+     * @param account   账号
+     * @param sessionId the session id
      */
     public synchronized void bindSessionIdsToAccount(String account, String sessionId) {
         Set<String> sessionIds = accountSessionIdsCache.get(account);

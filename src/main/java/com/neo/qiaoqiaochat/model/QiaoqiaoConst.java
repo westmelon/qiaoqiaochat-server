@@ -5,7 +5,7 @@ import io.netty.util.AttributeKey;
 public class QiaoqiaoConst {
 
 
-    public static interface ServerConfig{
+    public static interface ServerConfig {
         public static final int SERVER_CONNET_TIMEOUT = 10;
         public static final int WRITE_IDLE_TIMEOUT = 10;
         public static final int READ_IDLE_TIMEOUT = 10;
@@ -16,7 +16,7 @@ public class QiaoqiaoConst {
         public static final int SOCKET = 1;
     }
 
-    public static interface SessionConfig{
+    public static interface SessionConfig {
         public static final String SESSION_KEY = "account";
         public static final String HEARTBEAT_KEY = "heartbeat";
 
@@ -26,13 +26,39 @@ public class QiaoqiaoConst {
     }
 
 
+    public interface FriendAction {
+        int PASSED_FRIEND_REQUIRE = 0;  //通过好友请求
+        int REFUSE_FRIEND_REQUIRE = 1;  //拒绝好友请求
+        int BLACK_FRIEND_REQUIRE = 2;  //拉黑好友请求
+    }
 
-    public static interface MessageType {
-        public static final int SEND = 0;
-        public static final int SEND_REPLY = 1;
-        public static final int NOTIFY = 2;
-        public static final int NOTIFY_REPLY = 3;
+    public interface FriendRelationIndex {
+        int WAITING = 0;  //待添加
+        int GOOD_FRIEND = 1;  //好友关系
+        int DELETE = 2;  //已删除
+        int BLACK_FRIEND = 2;  //已拉黑
+        int REFUSE = 3;  //被拒绝
+    }
 
+    public interface MessageReceiveSetting {
+        int RECEIVE_AND_REMAIND = 0;  //接收并提示消息
+        int RECEIVE_NOT_REMAIND = 1;  //接受但是不提示消息
+        int REFUSE = 2;  //拒收消息
+    }
+
+    public interface MessageState {
+        int NOT_SEND = 0; //未发送
+        int SEND = 0;     //已发送
+    }
+
+    public interface MessageContentType {
+        String ADD_FRIEND = "00";
+        String PASSED_FRIEND_REQUIRE = "01";
+        String REFUSE_FRIEND_REQUIRE = "02";
+        String TEXT = "10";
+        String VOICE = "11";
+        String IMAGE = "12";
+        String VIDEO = "13";
     }
 
     public static interface ShiroConfig {

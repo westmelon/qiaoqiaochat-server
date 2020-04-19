@@ -1,4 +1,4 @@
-package com.neo.qiaoqiaochat.service;
+package com.neo.qiaoqiaochat.service.impl;
 
 import com.google.gson.Gson;
 import com.neo.qiaoqiaochat.config.redis.RedisCacheManager;
@@ -25,13 +25,13 @@ import java.util.UUID;
 @Service
 public class LoginService {
 
-    private final static Logger logger = LoggerFactory.getLogger(LoginService.class);
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private RedisCacheManager cacheManager;
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
 
     @Deprecated
     public String login(String content){

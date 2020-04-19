@@ -17,7 +17,8 @@ public enum ResultCode {
     ACCOUNT_NOT_FOUND(700,"用户账号不存在"),
     PASSWORD_NOT_MATCH(701,"账号或密码错误"),
     PASSWORD_TRY_TOO_MUCH_TIME(702,"密码错误错误次数过多，请稍后再试"),
-    REGIST_ERROR_ACCOUNT_EXISTS(750,"该账号已存在")
+    REGIST_ERROR_ACCOUNT_EXISTS(750,"该账号已存在"),
+    YOU_ARE_ALREADY_FRIEND(751,"你们已经是好友啦！")
 
     ;
 

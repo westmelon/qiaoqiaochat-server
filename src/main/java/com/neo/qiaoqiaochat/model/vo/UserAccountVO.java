@@ -1,6 +1,11 @@
 package com.neo.qiaoqiaochat.model.vo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(value = {"id", "password"})
 public class UserAccountVO {
+
+    private Long id;
 
     private String account;
 
@@ -11,6 +16,14 @@ public class UserAccountVO {
     private String password;
 
     private String headImageIndex;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getAccount() {
         return account;

@@ -90,7 +90,7 @@ public class MessageHandler extends ChannelInboundHandlerAdapter {
         }else if (wrapper.isGroup()) {
             qConnector.pushGroupMessage(wrapper);
         }else if (wrapper.isSend()) {
-            qConnector.pushMessage(wrapper.getSessionId(),wrapper);
+            qConnector.serverForwardMessage(wrapper.getSessionId(),wrapper);
         } else if (wrapper.isSendReply()) {
             qConnector.pushMessage(wrapper);
 

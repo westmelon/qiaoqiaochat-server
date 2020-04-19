@@ -1,4 +1,4 @@
-package com.neo.qiaoqiaochat.service;
+package com.neo.qiaoqiaochat.service.impl;
 
 import com.google.gson.Gson;
 import com.neo.qiaoqiaochat.config.redis.RedisCacheManager;

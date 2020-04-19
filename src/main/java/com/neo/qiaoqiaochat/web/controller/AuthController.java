@@ -6,9 +6,9 @@ import com.neo.qiaoqiaochat.model.SimpleResult;
 import com.neo.qiaoqiaochat.model.dto.LoginDTO;
 import com.neo.qiaoqiaochat.model.vo.TokenVO;
 import com.neo.qiaoqiaochat.model.vo.UserAccountVO;
-import com.neo.qiaoqiaochat.service.AuthService;
-import com.neo.qiaoqiaochat.service.LoginService;
-import com.neo.qiaoqiaochat.service.UserService;
+import com.neo.qiaoqiaochat.service.impl.AuthService;
+import com.neo.qiaoqiaochat.service.impl.LoginService;
+import com.neo.qiaoqiaochat.service.impl.UserServiceImpl;
 import com.neo.qiaoqiaochat.util.ShiroUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
@@ -31,7 +31,7 @@ public class AuthController extends BaseController {
     private LoginService loginService;
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
     @Autowired
     private AuthService authService;
 

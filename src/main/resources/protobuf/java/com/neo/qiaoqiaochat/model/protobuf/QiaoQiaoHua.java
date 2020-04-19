@@ -49,10 +49,16 @@ public final class QiaoQiaoHua {
         getTextContentBytes();
 
     /**
-     * <code>uint32 mediaType = 5;</code>
-     * @return The mediaType.
+     * <code>string contentType = 5;</code>
+     * @return The contentType.
      */
-    int getMediaType();
+    java.lang.String getContentType();
+    /**
+     * <code>string contentType = 5;</code>
+     * @return The bytes for contentType.
+     */
+    com.google.protobuf.ByteString
+        getContentTypeBytes();
 
     /**
      * <code>bytes mediaContent = 6;</code>
@@ -133,25 +139,61 @@ public final class QiaoQiaoHua {
         getSignBytes();
 
     /**
-     * <code>uint32 clientType = 13;</code>
+     * <code>string requestId = 13;</code>
+     * @return The requestId.
+     */
+    java.lang.String getRequestId();
+    /**
+     * <code>string requestId = 13;</code>
+     * @return The bytes for requestId.
+     */
+    com.google.protobuf.ByteString
+        getRequestIdBytes();
+
+    /**
+     * <code>string responseId = 14;</code>
+     * @return The responseId.
+     */
+    java.lang.String getResponseId();
+    /**
+     * <code>string responseId = 14;</code>
+     * @return The bytes for responseId.
+     */
+    com.google.protobuf.ByteString
+        getResponseIdBytes();
+
+    /**
+     * <code>string uniqueId = 15;</code>
+     * @return The uniqueId.
+     */
+    java.lang.String getUniqueId();
+    /**
+     * <code>string uniqueId = 15;</code>
+     * @return The bytes for uniqueId.
+     */
+    com.google.protobuf.ByteString
+        getUniqueIdBytes();
+
+    /**
+     * <code>uint32 clientType = 16;</code>
      * @return The clientType.
      */
     int getClientType();
 
     /**
-     * <code>string clientVersion = 14;</code>
+     * <code>string clientVersion = 17;</code>
      * @return The clientVersion.
      */
     java.lang.String getClientVersion();
     /**
-     * <code>string clientVersion = 14;</code>
+     * <code>string clientVersion = 17;</code>
      * @return The bytes for clientVersion.
      */
     com.google.protobuf.ByteString
         getClientVersionBytes();
 
     /**
-     * <code>uint32 encryptionType = 15;</code>
+     * <code>uint32 encryptionType = 18;</code>
      * @return The encryptionType.
      */
     int getEncryptionType();
@@ -170,6 +212,7 @@ public final class QiaoQiaoHua {
     }
     private Model() {
       textContent_ = "";
+      contentType_ = "";
       mediaContent_ = com.google.protobuf.ByteString.EMPTY;
       groupId_ = "";
       sender_ = "";
@@ -177,6 +220,9 @@ public final class QiaoQiaoHua {
       token_ = "";
       appKey_ = "";
       sign_ = "";
+      requestId_ = "";
+      responseId_ = "";
+      uniqueId_ = "";
       clientVersion_ = "";
     }
 
@@ -231,9 +277,10 @@ public final class QiaoQiaoHua {
               textContent_ = s;
               break;
             }
-            case 40: {
+            case 42: {
+              java.lang.String s = input.readStringRequireUtf8();
 
-              mediaType_ = input.readUInt32();
+              contentType_ = s;
               break;
             }
             case 50: {
@@ -277,18 +324,36 @@ public final class QiaoQiaoHua {
               sign_ = s;
               break;
             }
-            case 104: {
+            case 106: {
+              java.lang.String s = input.readStringRequireUtf8();
 
-              clientType_ = input.readUInt32();
+              requestId_ = s;
               break;
             }
             case 114: {
               java.lang.String s = input.readStringRequireUtf8();
 
+              responseId_ = s;
+              break;
+            }
+            case 122: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              uniqueId_ = s;
+              break;
+            }
+            case 128: {
+
+              clientType_ = input.readUInt32();
+              break;
+            }
+            case 138: {
+              java.lang.String s = input.readStringRequireUtf8();
+
               clientVersion_ = s;
               break;
             }
-            case 120: {
+            case 144: {
 
               encryptionType_ = input.readUInt32();
               break;
@@ -391,14 +456,40 @@ public final class QiaoQiaoHua {
       }
     }
 
-    public static final int MEDIATYPE_FIELD_NUMBER = 5;
-    private int mediaType_;
+    public static final int CONTENTTYPE_FIELD_NUMBER = 5;
+    private volatile java.lang.Object contentType_;
     /**
-     * <code>uint32 mediaType = 5;</code>
-     * @return The mediaType.
+     * <code>string contentType = 5;</code>
+     * @return The contentType.
      */
-    public int getMediaType() {
-      return mediaType_;
+    public java.lang.String getContentType() {
+      java.lang.Object ref = contentType_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        contentType_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string contentType = 5;</code>
+     * @return The bytes for contentType.
+     */
+    public com.google.protobuf.ByteString
+        getContentTypeBytes() {
+      java.lang.Object ref = contentType_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        contentType_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int MEDIACONTENT_FIELD_NUMBER = 6;
@@ -627,20 +718,128 @@ public final class QiaoQiaoHua {
       }
     }
 
-    public static final int CLIENTTYPE_FIELD_NUMBER = 13;
+    public static final int REQUESTID_FIELD_NUMBER = 13;
+    private volatile java.lang.Object requestId_;
+    /**
+     * <code>string requestId = 13;</code>
+     * @return The requestId.
+     */
+    public java.lang.String getRequestId() {
+      java.lang.Object ref = requestId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        requestId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string requestId = 13;</code>
+     * @return The bytes for requestId.
+     */
+    public com.google.protobuf.ByteString
+        getRequestIdBytes() {
+      java.lang.Object ref = requestId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        requestId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int RESPONSEID_FIELD_NUMBER = 14;
+    private volatile java.lang.Object responseId_;
+    /**
+     * <code>string responseId = 14;</code>
+     * @return The responseId.
+     */
+    public java.lang.String getResponseId() {
+      java.lang.Object ref = responseId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        responseId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string responseId = 14;</code>
+     * @return The bytes for responseId.
+     */
+    public com.google.protobuf.ByteString
+        getResponseIdBytes() {
+      java.lang.Object ref = responseId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        responseId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int UNIQUEID_FIELD_NUMBER = 15;
+    private volatile java.lang.Object uniqueId_;
+    /**
+     * <code>string uniqueId = 15;</code>
+     * @return The uniqueId.
+     */
+    public java.lang.String getUniqueId() {
+      java.lang.Object ref = uniqueId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        uniqueId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string uniqueId = 15;</code>
+     * @return The bytes for uniqueId.
+     */
+    public com.google.protobuf.ByteString
+        getUniqueIdBytes() {
+      java.lang.Object ref = uniqueId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        uniqueId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int CLIENTTYPE_FIELD_NUMBER = 16;
     private int clientType_;
     /**
-     * <code>uint32 clientType = 13;</code>
+     * <code>uint32 clientType = 16;</code>
      * @return The clientType.
      */
     public int getClientType() {
       return clientType_;
     }
 
-    public static final int CLIENTVERSION_FIELD_NUMBER = 14;
+    public static final int CLIENTVERSION_FIELD_NUMBER = 17;
     private volatile java.lang.Object clientVersion_;
     /**
-     * <code>string clientVersion = 14;</code>
+     * <code>string clientVersion = 17;</code>
      * @return The clientVersion.
      */
     public java.lang.String getClientVersion() {
@@ -656,7 +855,7 @@ public final class QiaoQiaoHua {
       }
     }
     /**
-     * <code>string clientVersion = 14;</code>
+     * <code>string clientVersion = 17;</code>
      * @return The bytes for clientVersion.
      */
     public com.google.protobuf.ByteString
@@ -673,10 +872,10 @@ public final class QiaoQiaoHua {
       }
     }
 
-    public static final int ENCRYPTIONTYPE_FIELD_NUMBER = 15;
+    public static final int ENCRYPTIONTYPE_FIELD_NUMBER = 18;
     private int encryptionType_;
     /**
-     * <code>uint32 encryptionType = 15;</code>
+     * <code>uint32 encryptionType = 18;</code>
      * @return The encryptionType.
      */
     public int getEncryptionType() {
@@ -709,8 +908,8 @@ public final class QiaoQiaoHua {
       if (!getTextContentBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 4, textContent_);
       }
-      if (mediaType_ != 0) {
-        output.writeUInt32(5, mediaType_);
+      if (!getContentTypeBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, contentType_);
       }
       if (!mediaContent_.isEmpty()) {
         output.writeBytes(6, mediaContent_);
@@ -733,14 +932,23 @@ public final class QiaoQiaoHua {
       if (!getSignBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 12, sign_);
       }
+      if (!getRequestIdBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 13, requestId_);
+      }
+      if (!getResponseIdBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 14, responseId_);
+      }
+      if (!getUniqueIdBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 15, uniqueId_);
+      }
       if (clientType_ != 0) {
-        output.writeUInt32(13, clientType_);
+        output.writeUInt32(16, clientType_);
       }
       if (!getClientVersionBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 14, clientVersion_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 17, clientVersion_);
       }
       if (encryptionType_ != 0) {
-        output.writeUInt32(15, encryptionType_);
+        output.writeUInt32(18, encryptionType_);
       }
       unknownFields.writeTo(output);
     }
@@ -766,9 +974,8 @@ public final class QiaoQiaoHua {
       if (!getTextContentBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, textContent_);
       }
-      if (mediaType_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(5, mediaType_);
+      if (!getContentTypeBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, contentType_);
       }
       if (!mediaContent_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
@@ -792,16 +999,25 @@ public final class QiaoQiaoHua {
       if (!getSignBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(12, sign_);
       }
+      if (!getRequestIdBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(13, requestId_);
+      }
+      if (!getResponseIdBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(14, responseId_);
+      }
+      if (!getUniqueIdBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(15, uniqueId_);
+      }
       if (clientType_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(13, clientType_);
+          .computeUInt32Size(16, clientType_);
       }
       if (!getClientVersionBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(14, clientVersion_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(17, clientVersion_);
       }
       if (encryptionType_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(15, encryptionType_);
+          .computeUInt32Size(18, encryptionType_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -826,8 +1042,8 @@ public final class QiaoQiaoHua {
           != other.getTimestamp()) return false;
       if (!getTextContent()
           .equals(other.getTextContent())) return false;
-      if (getMediaType()
-          != other.getMediaType()) return false;
+      if (!getContentType()
+          .equals(other.getContentType())) return false;
       if (!getMediaContent()
           .equals(other.getMediaContent())) return false;
       if (!getGroupId()
@@ -842,6 +1058,12 @@ public final class QiaoQiaoHua {
           .equals(other.getAppKey())) return false;
       if (!getSign()
           .equals(other.getSign())) return false;
+      if (!getRequestId()
+          .equals(other.getRequestId())) return false;
+      if (!getResponseId()
+          .equals(other.getResponseId())) return false;
+      if (!getUniqueId()
+          .equals(other.getUniqueId())) return false;
       if (getClientType()
           != other.getClientType()) return false;
       if (!getClientVersion()
@@ -868,8 +1090,8 @@ public final class QiaoQiaoHua {
           getTimestamp());
       hash = (37 * hash) + TEXTCONTENT_FIELD_NUMBER;
       hash = (53 * hash) + getTextContent().hashCode();
-      hash = (37 * hash) + MEDIATYPE_FIELD_NUMBER;
-      hash = (53 * hash) + getMediaType();
+      hash = (37 * hash) + CONTENTTYPE_FIELD_NUMBER;
+      hash = (53 * hash) + getContentType().hashCode();
       hash = (37 * hash) + MEDIACONTENT_FIELD_NUMBER;
       hash = (53 * hash) + getMediaContent().hashCode();
       hash = (37 * hash) + GROUPID_FIELD_NUMBER;
@@ -884,6 +1106,12 @@ public final class QiaoQiaoHua {
       hash = (53 * hash) + getAppKey().hashCode();
       hash = (37 * hash) + SIGN_FIELD_NUMBER;
       hash = (53 * hash) + getSign().hashCode();
+      hash = (37 * hash) + REQUESTID_FIELD_NUMBER;
+      hash = (53 * hash) + getRequestId().hashCode();
+      hash = (37 * hash) + RESPONSEID_FIELD_NUMBER;
+      hash = (53 * hash) + getResponseId().hashCode();
+      hash = (37 * hash) + UNIQUEID_FIELD_NUMBER;
+      hash = (53 * hash) + getUniqueId().hashCode();
       hash = (37 * hash) + CLIENTTYPE_FIELD_NUMBER;
       hash = (53 * hash) + getClientType();
       hash = (37 * hash) + CLIENTVERSION_FIELD_NUMBER;
@@ -1031,7 +1259,7 @@ public final class QiaoQiaoHua {
 
         textContent_ = "";
 
-        mediaType_ = 0;
+        contentType_ = "";
 
         mediaContent_ = com.google.protobuf.ByteString.EMPTY;
 
@@ -1046,6 +1274,12 @@ public final class QiaoQiaoHua {
         appKey_ = "";
 
         sign_ = "";
+
+        requestId_ = "";
+
+        responseId_ = "";
+
+        uniqueId_ = "";
 
         clientType_ = 0;
 
@@ -1083,7 +1317,7 @@ public final class QiaoQiaoHua {
         result.msgType_ = msgType_;
         result.timestamp_ = timestamp_;
         result.textContent_ = textContent_;
-        result.mediaType_ = mediaType_;
+        result.contentType_ = contentType_;
         result.mediaContent_ = mediaContent_;
         result.groupId_ = groupId_;
         result.sender_ = sender_;
@@ -1091,6 +1325,9 @@ public final class QiaoQiaoHua {
         result.token_ = token_;
         result.appKey_ = appKey_;
         result.sign_ = sign_;
+        result.requestId_ = requestId_;
+        result.responseId_ = responseId_;
+        result.uniqueId_ = uniqueId_;
         result.clientType_ = clientType_;
         result.clientVersion_ = clientVersion_;
         result.encryptionType_ = encryptionType_;
@@ -1155,8 +1392,9 @@ public final class QiaoQiaoHua {
           textContent_ = other.textContent_;
           onChanged();
         }
-        if (other.getMediaType() != 0) {
-          setMediaType(other.getMediaType());
+        if (!other.getContentType().isEmpty()) {
+          contentType_ = other.contentType_;
+          onChanged();
         }
         if (other.getMediaContent() != com.google.protobuf.ByteString.EMPTY) {
           setMediaContent(other.getMediaContent());
@@ -1183,6 +1421,18 @@ public final class QiaoQiaoHua {
         }
         if (!other.getSign().isEmpty()) {
           sign_ = other.sign_;
+          onChanged();
+        }
+        if (!other.getRequestId().isEmpty()) {
+          requestId_ = other.requestId_;
+          onChanged();
+        }
+        if (!other.getResponseId().isEmpty()) {
+          responseId_ = other.responseId_;
+          onChanged();
+        }
+        if (!other.getUniqueId().isEmpty()) {
+          uniqueId_ = other.uniqueId_;
           onChanged();
         }
         if (other.getClientType() != 0) {
@@ -1390,32 +1640,78 @@ public final class QiaoQiaoHua {
         return this;
       }
 
-      private int mediaType_ ;
+      private java.lang.Object contentType_ = "";
       /**
-       * <code>uint32 mediaType = 5;</code>
-       * @return The mediaType.
+       * <code>string contentType = 5;</code>
+       * @return The contentType.
        */
-      public int getMediaType() {
-        return mediaType_;
+      public java.lang.String getContentType() {
+        java.lang.Object ref = contentType_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          contentType_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>uint32 mediaType = 5;</code>
-       * @param value The mediaType to set.
+       * <code>string contentType = 5;</code>
+       * @return The bytes for contentType.
+       */
+      public com.google.protobuf.ByteString
+          getContentTypeBytes() {
+        java.lang.Object ref = contentType_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          contentType_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string contentType = 5;</code>
+       * @param value The contentType to set.
        * @return This builder for chaining.
        */
-      public Builder setMediaType(int value) {
-        
-        mediaType_ = value;
+      public Builder setContentType(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        contentType_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>uint32 mediaType = 5;</code>
+       * <code>string contentType = 5;</code>
        * @return This builder for chaining.
        */
-      public Builder clearMediaType() {
+      public Builder clearContentType() {
         
-        mediaType_ = 0;
+        contentType_ = getDefaultInstance().getContentType();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string contentType = 5;</code>
+       * @param value The bytes for contentType to set.
+       * @return This builder for chaining.
+       */
+      public Builder setContentTypeBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        contentType_ = value;
         onChanged();
         return this;
       }
@@ -1909,16 +2205,244 @@ public final class QiaoQiaoHua {
         return this;
       }
 
+      private java.lang.Object requestId_ = "";
+      /**
+       * <code>string requestId = 13;</code>
+       * @return The requestId.
+       */
+      public java.lang.String getRequestId() {
+        java.lang.Object ref = requestId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          requestId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string requestId = 13;</code>
+       * @return The bytes for requestId.
+       */
+      public com.google.protobuf.ByteString
+          getRequestIdBytes() {
+        java.lang.Object ref = requestId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          requestId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string requestId = 13;</code>
+       * @param value The requestId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setRequestId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        requestId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string requestId = 13;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearRequestId() {
+        
+        requestId_ = getDefaultInstance().getRequestId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string requestId = 13;</code>
+       * @param value The bytes for requestId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setRequestIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        requestId_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object responseId_ = "";
+      /**
+       * <code>string responseId = 14;</code>
+       * @return The responseId.
+       */
+      public java.lang.String getResponseId() {
+        java.lang.Object ref = responseId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          responseId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string responseId = 14;</code>
+       * @return The bytes for responseId.
+       */
+      public com.google.protobuf.ByteString
+          getResponseIdBytes() {
+        java.lang.Object ref = responseId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          responseId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string responseId = 14;</code>
+       * @param value The responseId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setResponseId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        responseId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string responseId = 14;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearResponseId() {
+        
+        responseId_ = getDefaultInstance().getResponseId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string responseId = 14;</code>
+       * @param value The bytes for responseId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setResponseIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        responseId_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object uniqueId_ = "";
+      /**
+       * <code>string uniqueId = 15;</code>
+       * @return The uniqueId.
+       */
+      public java.lang.String getUniqueId() {
+        java.lang.Object ref = uniqueId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          uniqueId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string uniqueId = 15;</code>
+       * @return The bytes for uniqueId.
+       */
+      public com.google.protobuf.ByteString
+          getUniqueIdBytes() {
+        java.lang.Object ref = uniqueId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          uniqueId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string uniqueId = 15;</code>
+       * @param value The uniqueId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUniqueId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        uniqueId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string uniqueId = 15;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearUniqueId() {
+        
+        uniqueId_ = getDefaultInstance().getUniqueId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string uniqueId = 15;</code>
+       * @param value The bytes for uniqueId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUniqueIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        uniqueId_ = value;
+        onChanged();
+        return this;
+      }
+
       private int clientType_ ;
       /**
-       * <code>uint32 clientType = 13;</code>
+       * <code>uint32 clientType = 16;</code>
        * @return The clientType.
        */
       public int getClientType() {
         return clientType_;
       }
       /**
-       * <code>uint32 clientType = 13;</code>
+       * <code>uint32 clientType = 16;</code>
        * @param value The clientType to set.
        * @return This builder for chaining.
        */
@@ -1929,7 +2453,7 @@ public final class QiaoQiaoHua {
         return this;
       }
       /**
-       * <code>uint32 clientType = 13;</code>
+       * <code>uint32 clientType = 16;</code>
        * @return This builder for chaining.
        */
       public Builder clearClientType() {
@@ -1941,7 +2465,7 @@ public final class QiaoQiaoHua {
 
       private java.lang.Object clientVersion_ = "";
       /**
-       * <code>string clientVersion = 14;</code>
+       * <code>string clientVersion = 17;</code>
        * @return The clientVersion.
        */
       public java.lang.String getClientVersion() {
@@ -1957,7 +2481,7 @@ public final class QiaoQiaoHua {
         }
       }
       /**
-       * <code>string clientVersion = 14;</code>
+       * <code>string clientVersion = 17;</code>
        * @return The bytes for clientVersion.
        */
       public com.google.protobuf.ByteString
@@ -1974,7 +2498,7 @@ public final class QiaoQiaoHua {
         }
       }
       /**
-       * <code>string clientVersion = 14;</code>
+       * <code>string clientVersion = 17;</code>
        * @param value The clientVersion to set.
        * @return This builder for chaining.
        */
@@ -1989,7 +2513,7 @@ public final class QiaoQiaoHua {
         return this;
       }
       /**
-       * <code>string clientVersion = 14;</code>
+       * <code>string clientVersion = 17;</code>
        * @return This builder for chaining.
        */
       public Builder clearClientVersion() {
@@ -1999,7 +2523,7 @@ public final class QiaoQiaoHua {
         return this;
       }
       /**
-       * <code>string clientVersion = 14;</code>
+       * <code>string clientVersion = 17;</code>
        * @param value The bytes for clientVersion to set.
        * @return This builder for chaining.
        */
@@ -2017,14 +2541,14 @@ public final class QiaoQiaoHua {
 
       private int encryptionType_ ;
       /**
-       * <code>uint32 encryptionType = 15;</code>
+       * <code>uint32 encryptionType = 18;</code>
        * @return The encryptionType.
        */
       public int getEncryptionType() {
         return encryptionType_;
       }
       /**
-       * <code>uint32 encryptionType = 15;</code>
+       * <code>uint32 encryptionType = 18;</code>
        * @param value The encryptionType to set.
        * @return This builder for chaining.
        */
@@ -2035,7 +2559,7 @@ public final class QiaoQiaoHua {
         return this;
       }
       /**
-       * <code>uint32 encryptionType = 15;</code>
+       * <code>uint32 encryptionType = 18;</code>
        * @return This builder for chaining.
        */
       public Builder clearEncryptionType() {
@@ -2111,16 +2635,17 @@ public final class QiaoQiaoHua {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\027proto/qiaoqiaohua.proto\"\231\002\n\005Model\022\013\n\003c" +
+      "\n\027proto/qiaoqiaohua.proto\"\324\002\n\005Model\022\013\n\003c" +
       "md\030\001 \001(\r\022\017\n\007msgType\030\002 \001(\r\022\021\n\ttimestamp\030\003" +
-      " \001(\004\022\023\n\013textContent\030\004 \001(\t\022\021\n\tmediaType\030\005" +
-      " \001(\r\022\024\n\014mediaContent\030\006 \001(\014\022\017\n\007groupId\030\007 " +
-      "\001(\t\022\016\n\006sender\030\010 \001(\t\022\020\n\010receiver\030\t \001(\t\022\r\n" +
-      "\005token\030\n \001(\t\022\016\n\006appKey\030\013 \001(\t\022\014\n\004sign\030\014 \001" +
-      "(\t\022\022\n\nclientType\030\r \001(\r\022\025\n\rclientVersion\030" +
-      "\016 \001(\t\022\026\n\016encryptionType\030\017 \001(\rB2\n#com.neo" +
-      ".qiaoqiaochat.model.protobufB\013QiaoQiaoHu" +
-      "ab\006proto3"
+      " \001(\004\022\023\n\013textContent\030\004 \001(\t\022\023\n\013contentType" +
+      "\030\005 \001(\t\022\024\n\014mediaContent\030\006 \001(\014\022\017\n\007groupId\030" +
+      "\007 \001(\t\022\016\n\006sender\030\010 \001(\t\022\020\n\010receiver\030\t \001(\t\022" +
+      "\r\n\005token\030\n \001(\t\022\016\n\006appKey\030\013 \001(\t\022\014\n\004sign\030\014" +
+      " \001(\t\022\021\n\trequestId\030\r \001(\t\022\022\n\nresponseId\030\016 " +
+      "\001(\t\022\020\n\010uniqueId\030\017 \001(\t\022\022\n\nclientType\030\020 \001(" +
+      "\r\022\025\n\rclientVersion\030\021 \001(\t\022\026\n\016encryptionTy" +
+      "pe\030\022 \001(\rB2\n#com.neo.qiaoqiaochat.model.p" +
+      "rotobufB\013QiaoQiaoHuab\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -2131,7 +2656,7 @@ public final class QiaoQiaoHua {
     internal_static_Model_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Model_descriptor,
-        new java.lang.String[] { "Cmd", "MsgType", "Timestamp", "TextContent", "MediaType", "MediaContent", "GroupId", "Sender", "Receiver", "Token", "AppKey", "Sign", "ClientType", "ClientVersion", "EncryptionType", });
+        new java.lang.String[] { "Cmd", "MsgType", "Timestamp", "TextContent", "ContentType", "MediaContent", "GroupId", "Sender", "Receiver", "Token", "AppKey", "Sign", "RequestId", "ResponseId", "UniqueId", "ClientType", "ClientVersion", "EncryptionType", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

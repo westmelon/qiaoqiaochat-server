@@ -8,7 +8,7 @@ message Model {
   uint64 timestamp = 3;
 
   string textContent = 4;
-  uint32 mediaType = 5;
+  string contentType = 5;
   bytes mediaContent = 6;
 
   string groupId = 7;
@@ -19,7 +19,12 @@ message Model {
   string appKey = 11;
   string sign = 12;
 
-  uint32 clientType = 13;
-  string clientVersion = 14;
-  uint32 encryptionType = 15;
+  string requestId = 13;
+  string responseId = 14;
+  string uniqueId = 15;
+
+  uint32 clientType = 16;
+  string clientVersion = 17;
+  uint32 encryptionType = 18;
+
 }

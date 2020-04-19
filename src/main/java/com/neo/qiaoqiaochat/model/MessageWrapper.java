@@ -4,10 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
- * @Description: 消息包装类
- * @Author Neo Lin
- * @Date  2020/3/19 20:54
+/**
+ * 消息包装类
  */
 public class MessageWrapper implements Serializable {
 
@@ -23,6 +21,19 @@ public class MessageWrapper implements Serializable {
      * 消息接收者的sessionId列表
      */
     private List<String> reSessionIds;
+
+
+    /**
+     * 消息发送者Id
+     */
+    private Long senderId;
+
+
+    /**
+     * 消息接受者id
+     */
+    private Long receiverId;
+
 
     private int source;
 
@@ -66,6 +77,22 @@ public class MessageWrapper implements Serializable {
 
     public void setBody(Object body) {
         this.body = body;
+    }
+
+    public Long getSenderId() {
+        return senderId;
+    }
+
+    public void setSenderId(Long senderId) {
+        this.senderId = senderId;
+    }
+
+    public Long getReceiverId() {
+        return receiverId;
+    }
+
+    public void setReceiverId(Long receiverId) {
+        this.receiverId = receiverId;
     }
 
     public boolean isConnect() {

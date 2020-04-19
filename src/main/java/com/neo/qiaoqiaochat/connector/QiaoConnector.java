@@ -2,12 +2,13 @@ package com.neo.qiaoqiaochat.connector;
 
 import com.neo.qiaoqiaochat.model.MessageWrapper;
 import com.neo.qiaoqiaochat.model.QiaoqiaoConst;
+import com.neo.qiaoqiaochat.model.bo.AddFriendBO;
+import com.neo.qiaoqiaochat.model.bo.ConfirmFriendBO;
 import com.neo.qiaoqiaochat.model.emun.MiCommand;
+import com.neo.qiaoqiaochat.model.emun.MiMessageType;
 import com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua;
-import com.neo.qiaoqiaochat.proxy.MessageFactory;
 import com.neo.qiaoqiaochat.proxy.MessageProxy;
-import com.neo.qiaoqiaochat.service.AuthService;
-import com.neo.qiaoqiaochat.service.LoginService;
+import com.neo.qiaoqiaochat.service.impl.AuthService;
 import com.neo.qiaoqiaochat.session.Session;
 import com.neo.qiaoqiaochat.session.NettySessionManager;
 import com.neo.qiaoqiaochat.session.SessionProxy;
@@ -41,21 +42,22 @@ public class QiaoConnector implements QConnector {
 
     @Override
     public void heartbeatToClient(ChannelHandlerContext ctx) {
-        MessageWrapper serverMessage = MessageFactory.createServerMessage(ctx, MiCommand.HEARTBEAT);
-        //TODO 去除冗余代码
-        List<String> reSessionIds = serverMessage.getReSessionIds();
-        List<Session> sessions = nettySessionManager.getSessions(reSessionIds);
-        SessionProxy proxy = new SessionProxy(sessions);
-        boolean writeSuccess = proxy.write(serverMessage.getBody());
+        String sessionId = getChannelSessionId(ctx);
+        QiaoQiaoHua.Model.Builder builder = QiaoQiaoHua.Model.newBuilder();
+        MessageWrapper serverMessage = messageProxy.createServerMessage(sessionId, builder, MiCommand.HEARTBEAT, null);
+
+        Session session = nettySessionManager.getSession(sessionId);
+        SessionProxy proxy = new SessionProxy(session);
+        proxy.write(serverMessage.getBody());
     }
 
 
     @Override
-    public void pushMessage(MessageWrapper wrapper) throws RuntimeException {
+    public void pushMessage(MessageWrapper wrapper) {
         //服务器接收到消息的回执信息
         String sessionId = wrapper.getSessionId();
         Session session = nettySessionManager.getSession(sessionId);
-        if(session != null){
+        if (session != null) {
             //todo
             SessionProxy proxy = new SessionProxy(session);
             proxy.write(wrapper.getBody());
@@ -64,34 +66,106 @@ public class QiaoConnector implements QConnector {
 
     /**
      * 服务端接收到用户间的消息进行转发
-     * @param sessionId
-     * @param wrapper
-     * @throws RuntimeException
+     *
+     * @param sessionId the session id
+     * @param wrapper   the wrapper
      */
     @Override
-    public void pushMessage(String sessionId, MessageWrapper wrapper) throws RuntimeException {
+    public void serverForwardMessage(String sessionId, MessageWrapper wrapper) {
+        //TODO 此处sessionId似乎没卵用啊
         Session session = nettySessionManager.getSession(sessionId);
-        if(session != null){
+        if (session != null) {
             //发送消息
             List<String> reSessionIds = wrapper.getReSessionIds();
             List<Session> sessions = nettySessionManager.getSessions(reSessionIds);
             SessionProxy proxy = new SessionProxy(sessions);
             boolean writeSuccess = proxy.write(wrapper.getBody());
 
-            if(writeSuccess){
+            if (writeSuccess) {
                 messageProxy.saveOnlineMessageToDB(wrapper);
-            }else{
+            } else {
                 messageProxy.saveOfflineMessageToDB(wrapper);
             }
-
-
-        }else{ //用户当前不在线
+        } else { //用户当前不在线
             messageProxy.saveOfflineMessageToDB(wrapper);
         }
     }
 
+    /**
+     * 服务端直接推送消息
+     *
+     * @param wrapper 消息包装对象
+     */
     @Override
-    public void pushGroupMessage(MessageWrapper wrapper) throws RuntimeException {
+    public void serverPushMessage(MessageWrapper wrapper) {
+        List<String> reSessionIds = wrapper.getReSessionIds();
+        List<Session> sessions = nettySessionManager.getSessions(reSessionIds);
+        SessionProxy proxy = new SessionProxy(sessions);
+        boolean writeSuccess = proxy.write(wrapper.getBody());
+
+        if (writeSuccess) {
+            messageProxy.saveOnlineMessageToDB(wrapper);
+        } else {
+            messageProxy.saveOfflineMessageToDB(wrapper);
+        }
+    }
+
+    /**
+     * 推送添加好友消息
+     *
+     * @param bo 添加好友业务对象
+     */
+    @Override
+    public void pushAddFriendMessage(AddFriendBO bo) {
+        String account = bo.getAccount();
+        List<String> sessionIds = nettySessionManager.getSessionIdsByAccount(account);
+
+        //服务端生成添加好友的消息
+        QiaoQiaoHua.Model.Builder builder = QiaoQiaoHua.Model.newBuilder();
+        builder.setReceiver(bo.getAccount());
+        builder.setSender(bo.getFromAccount());
+        builder.setTextContent(bo.getSecretSignal());
+        builder.setContentType(QiaoqiaoConst.MessageContentType.ADD_FRIEND);
+        MessageWrapper serverMessage = messageProxy.createServerMessage(sessionIds, builder, MiCommand.MESSAGE, MiMessageType.ADD_FRIEND);
+
+        serverPushMessage(serverMessage);
+
+    }
+
+    /**
+     * 推送添加好友反馈消息
+     *
+     * @param bo 反馈添加好友业务对象
+     */
+    @Override
+    public void pushConfirmFriendMessage(ConfirmFriendBO bo) {
+        String account = bo.getAccount();
+        List<String> sessionIds = nettySessionManager.getSessionIdsByAccount(account);
+
+        MiMessageType messageType = null;
+        String contentType = null;
+        if(QiaoqiaoConst.FriendAction.PASSED_FRIEND_REQUIRE == bo.getAction()){
+            messageType = MiMessageType.ADD_FRIEND;
+            contentType = QiaoqiaoConst.MessageContentType.PASSED_FRIEND_REQUIRE;
+        } else if (QiaoqiaoConst.FriendAction.REFUSE_FRIEND_REQUIRE == bo.getAction() ||
+                QiaoqiaoConst.FriendAction.BLACK_FRIEND_REQUIRE == bo.getAction()){
+            messageType = MiMessageType.REFUSE_FRIEND;
+            contentType = QiaoqiaoConst.MessageContentType.REFUSE_FRIEND_REQUIRE;
+        } else {
+            return;
+        }
+//服务端生成添加好友的消息
+        QiaoQiaoHua.Model.Builder builder = QiaoQiaoHua.Model.newBuilder();
+        builder.setReceiver(bo.getAccount());
+        builder.setSender(bo.getFromAccount());
+        builder.setTextContent(bo.getRemark());
+        builder.setContentType(contentType);
+        MessageWrapper serverMessage = messageProxy.createServerMessage(sessionIds, builder, MiCommand.MESSAGE, messageType);
+        serverPushMessage(serverMessage);
+    }
+
+    @Override
+    public void pushGroupMessage(MessageWrapper wrapper) {
         // TODO: 2020/3/22 发送群消息
     }
 
@@ -103,7 +177,7 @@ public class QiaoConnector implements QConnector {
     @Override
     public void close(ChannelHandlerContext hander) {
         String sessionId = getChannelSessionId(hander);
-        if(!StringUtils.isEmpty(sessionId)) {
+        if (!StringUtils.isEmpty(sessionId)) {
             close(sessionId);
         }
     }
@@ -134,8 +208,10 @@ public class QiaoConnector implements QConnector {
             setChannelSessionId(ctx, sessionId);
             logger.info("create channel attr sessionId " + sessionId + " successful, ctx -> " + ctx.toString());
         }
-        MessageWrapper serverAckMessage = MessageFactory.createServerAckMessage(wrapper);
-        pushMessage(serverAckMessage);
+        QiaoQiaoHua.Model.Builder builder = QiaoQiaoHua.Model.newBuilder();
+        builder.setReceiver(sender);
+        MessageWrapper serverMessage = messageProxy.createServerMessage(sessionId, builder, MiCommand.MESSAGE, MiMessageType.SEND_REPLY);
+        pushMessage(serverMessage);
     }
 
 

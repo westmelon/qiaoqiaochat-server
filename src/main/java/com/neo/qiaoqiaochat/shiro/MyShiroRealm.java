@@ -2,11 +2,9 @@ package com.neo.qiaoqiaochat.shiro;
 
 import com.neo.qiaoqiaochat.model.QiaoqiaoConst;
 import com.neo.qiaoqiaochat.model.vo.UserAccountVO;
-import com.neo.qiaoqiaochat.service.UserService;
+import com.neo.qiaoqiaochat.service.impl.UserServiceImpl;
 import org.apache.shiro.authc.*;
-import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.AuthorizationInfo;
-import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
@@ -17,7 +15,7 @@ import org.springframework.util.StringUtils;
 public class MyShiroRealm extends AuthorizingRealm {
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {

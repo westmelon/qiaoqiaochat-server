@@ -95,12 +95,48 @@
         </javaClientGenerator>
 
 
-        <table tableName="mi_user" domainObjectName="MiUserModel">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-            <columnOverride column="last_login_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-            <columnOverride column="crtime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+        <!--<table tableName="user" domainObjectName="MiUserModel">-->
+            <!--<columnOverride column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />-->
+            <!--<columnOverride column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />-->
+        <!--</table>-->
+
+        <!--<table tableName="friend" domainObjectName="MiFriendModel">-->
+            <!--<columnOverride column="relation_index" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+            <!--<columnOverride column="msg_receive_setting" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+            <!--<columnOverride column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />-->
+            <!--<columnOverride column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />-->
+        <!--</table>-->
+
+        <!--<table tableName="group" domainObjectName="MiGroupModel">-->
+            <!--<columnOverride column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />-->
+            <!--<columnOverride column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />-->
+        <!--</table>-->
+
+        <!--<table tableName="group_user_relation" domainObjectName="MiGroupUserRelationModel">-->
+            <!--<columnOverride column="msg_receive_setting" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+            <!--<columnOverride column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />-->
+            <!--<columnOverride column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />-->
+        <!--</table>-->
+
+        <!--<table tableName="message_offline" domainObjectName="MiMessageOfflineModel">-->
+            <!--<columnOverride column="state" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+            <!--<columnOverride column="send_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />-->
+            <!--<columnOverride column="receive_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />-->
+            <!--<columnOverride column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />-->
+            <!--<columnOverride column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />-->
+        <!--</table>-->
+
+        <!--<table tableName="message_history" domainObjectName="MiMessageHistoryModel">-->
+            <!--<columnOverride column="state" javaType="java.lang.Integer" jdbcType="TINYINT" />-->
+            <!--<columnOverride column="send_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />-->
+            <!--<columnOverride column="receive_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />-->
+            <!--<columnOverride column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />-->
+            <!--<columnOverride column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />-->
+        <!--</table>-->
+
+        <table tableName="message_content" domainObjectName="MiMessageContentModel">
+            <columnOverride column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <columnOverride column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
         </table>
-
-
     </context>
         </generatorConfiguration>

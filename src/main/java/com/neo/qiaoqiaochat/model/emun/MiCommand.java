@@ -33,6 +33,7 @@ public enum  MiCommand {
     MESSAGE(5);
 
     private final int code;
+
     MiCommand(int code) {
         this.code = code;
     }

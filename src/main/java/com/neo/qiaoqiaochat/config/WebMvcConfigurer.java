@@ -2,17 +2,19 @@ package com.neo.qiaoqiaochat.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import java.nio.charset.Charset;
+import java.util.List;
 
-/**
- * 说明：注册过滤器
- * 作者：王兆阳
- * 日期：2017-05-22
- **/
+
+
 @Configuration
-public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
+public class WebMvcConfigurer extends WebMvcConfigurationSupport {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -22,6 +24,8 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 
         super.addInterceptors(registry);
     }
+
+
     /**
      * 初始化应用
      * @return

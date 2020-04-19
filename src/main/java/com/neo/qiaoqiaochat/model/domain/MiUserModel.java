@@ -4,19 +4,17 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
-@Table(name = "mi_user")
+@Table(name = "user")
 public class MiUserModel implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String openid;
 
     /**
-     * 密号
+     * 账号
      */
-    @Column(name = "mi_hao")
-    private String miHao;
+    private String account;
 
     @Column(name = "nick_name")
     private String nickName;
@@ -36,7 +34,11 @@ public class MiUserModel implements Serializable {
     /**
      * 创建账户时间
      */
-    private Date crtime;
+    @Column(name = "create_time")
+    private Date createTime;
+
+    @Column(name = "update_time")
+    private Date updateTime;
 
     private static final long serialVersionUID = 1L;
 
@@ -69,21 +71,21 @@ public class MiUserModel implements Serializable {
     }
 
     /**
-     * 获取密号
+     * 获取账号
      *
-     * @return mi_hao - 密号
+     * @return account - 账号
      */
-    public String getMiHao() {
-        return miHao;
+    public String getAccount() {
+        return account;
     }
 
     /**
-     * 设置密号
+     * 设置账号
      *
-     * @param miHao 密号
+     * @param account 账号
      */
-    public void setMiHao(String miHao) {
-        this.miHao = miHao;
+    public void setAccount(String account) {
+        this.account = account;
     }
 
     /**
@@ -163,19 +165,33 @@ public class MiUserModel implements Serializable {
     /**
      * 获取创建账户时间
      *
-     * @return crtime - 创建账户时间
+     * @return create_time - 创建账户时间
      */
-    public Date getCrtime() {
-        return crtime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
     /**
      * 设置创建账户时间
      *
-     * @param crtime 创建账户时间
+     * @param createTime 创建账户时间
      */
-    public void setCrtime(Date crtime) {
-        this.crtime = crtime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    /**
+     * @return update_time
+     */
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    /**
+     * @param updateTime
+     */
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 
     @Override
@@ -186,13 +202,14 @@ public class MiUserModel implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", openid=").append(openid);
-        sb.append(", miHao=").append(miHao);
+        sb.append(", account=").append(account);
         sb.append(", nickName=").append(nickName);
         sb.append(", sex=").append(sex);
         sb.append(", introduce=").append(introduce);
         sb.append(", headImageIndex=").append(headImageIndex);
         sb.append(", password=").append(password);
-        sb.append(", crtime=").append(crtime);
+        sb.append(", createTime=").append(createTime);
+        sb.append(", updateTime=").append(updateTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

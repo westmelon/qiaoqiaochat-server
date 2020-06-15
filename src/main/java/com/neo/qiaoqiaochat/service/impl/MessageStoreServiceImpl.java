@@ -1,7 +1,6 @@
 package com.neo.qiaoqiaochat.service.impl;
 import java.util.Date;
 
-import com.neo.commons.utils.SnowflakeIdWorker;
 import com.neo.qiaoqiaochat.dao.MiMessageContentModelMapper;
 import com.neo.qiaoqiaochat.dao.MiMessageHistoryModelMapper;
 import com.neo.qiaoqiaochat.dao.MiMessageOfflineModelMapper;
@@ -11,11 +10,11 @@ import com.neo.qiaoqiaochat.model.domain.MiMessageContentModel;
 import com.neo.qiaoqiaochat.model.domain.MiMessageOfflineModel;
 import com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua;
 import com.neo.qiaoqiaochat.service.MessageStoreService;
+import com.neo.qiaoqiaochat.util.SnowflakeIdWorker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class MessageStoreServiceImpl implements MessageStoreService {

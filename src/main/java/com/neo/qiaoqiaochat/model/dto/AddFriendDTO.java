@@ -1,7 +1,7 @@
 package com.neo.qiaoqiaochat.model.dto;
 
 
-import com.neo.commons.annotation.NotEmpty;
+import javax.validation.constraints.NotEmpty;
 
 /**
  * 添加好友的实体类对象

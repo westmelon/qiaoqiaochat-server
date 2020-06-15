@@ -1,6 +1,5 @@
 package com.neo.qiaoqiaochat.exception;
 
-import com.neo.commons.exception.SimpleBusinessException;
 import com.neo.qiaoqiaochat.model.ResultCode;
 import com.neo.qiaoqiaochat.model.SimpleResult;
 import org.apache.shiro.authz.UnauthorizedException;
@@ -83,16 +82,6 @@ public class GlobalExceptionHandler {
         return rtn;
     }
 
-    @ExceptionHandler(SimpleBusinessException.class)
-    public
-    @ResponseBody
-    SimpleResult handleBusinessException(SimpleBusinessException ex){
-        logger.info("SimpleBusinessException info Msg",ex);
-        SimpleResult rtn = new SimpleResult();
-        rtn.setCode(ex.getCode());
-        rtn.setMessage(ex.getSubMsg());
-        return rtn;
-    }
 
     /**
      * 校验错误拦截处理

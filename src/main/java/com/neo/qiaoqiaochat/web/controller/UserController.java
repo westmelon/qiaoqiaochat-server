@@ -1,12 +1,10 @@
 package com.neo.qiaoqiaochat.web.controller;
 
-import com.neo.commons.utils.BaseController;
 import com.neo.qiaoqiaochat.model.SimpleResult;
 import com.neo.qiaoqiaochat.model.dto.AddFriendDTO;
 import com.neo.qiaoqiaochat.model.dto.ConfirmFriendDTO;
 import com.neo.qiaoqiaochat.model.dto.UserRegisterDTO;
 import com.neo.qiaoqiaochat.service.impl.UserServiceImpl;
-import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.io.IOException;
 import java.util.List;
 
 @RestController
 @RequestMapping("user")
-public class UserController extends BaseController {
+public class UserController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 

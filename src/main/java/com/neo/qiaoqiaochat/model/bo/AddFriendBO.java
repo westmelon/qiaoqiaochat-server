@@ -1,6 +1,7 @@
 package com.neo.qiaoqiaochat.model.bo;
 
-import com.neo.commons.annotation.NotEmpty;
+
+import javax.validation.constraints.NotEmpty;
 
 public class AddFriendBO {
 

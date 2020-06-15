@@ -1,8 +1,8 @@
 package com.neo.qiaoqiaochat.model.bo;
 
 
-import com.neo.commons.annotation.NotEmpty;
-import com.neo.commons.annotation.NotNull;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 /**
  * 确认添加好友业务对象.

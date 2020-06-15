@@ -1,7 +1,6 @@
 package com.neo.qiaoqiaochat.web.controller;
 
 
-import com.neo.commons.utils.BaseController;
 import com.neo.qiaoqiaochat.model.SimpleResult;
 import com.neo.qiaoqiaochat.model.dto.LoginDTO;
 import com.neo.qiaoqiaochat.model.vo.TokenVO;
@@ -15,15 +14,17 @@ import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.io.IOException;
 
 @RestController
 @RequestMapping("auth")
-public class AuthController extends BaseController {
+public class AuthController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -37,17 +38,17 @@ public class AuthController extends BaseController {
 
     @Autowired
     private HttpServletRequest request;
-        //注册
+    //注册
 
 
     /**
      * 登录
+     *
      * @return SimpleResult
      */
     @RequestMapping("login")
-    public SimpleResult login() throws IOException {
-            //验证登录成功以后 把用户账号 和token放入缓存中
-        LoginDTO dto = getAndCheckParam(request.getInputStream(), LoginDTO.class);
+    public SimpleResult login(@RequestBody @Valid LoginDTO dto) throws IOException {
+        //验证登录成功以后 把用户账号 和token放入缓存中
         loginService.login(dto);
         loginService.doAfterLogin(dto.getAccount());
         return new SimpleResult();
@@ -55,6 +56,7 @@ public class AuthController extends BaseController {
 
     /**
      * 获取用户token
+     *
      * @return SimpleResult
      */
     @RequestMapping("token")
@@ -71,6 +73,7 @@ public class AuthController extends BaseController {
 
     /**
      * 登出
+     *
      * @return SimpleResult
      * @throws IOException
      */
@@ -81,4 +84,4 @@ public class AuthController extends BaseController {
         return new SimpleResult();
     }
 
-    }
+}

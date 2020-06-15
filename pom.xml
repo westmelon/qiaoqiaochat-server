@@ -70,8 +70,8 @@
         <!--数据源-->
         <dependency>
             <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>1.0.29</version>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>1.1.17</version>
         </dependency>
         <!--Mysql 驱动-->
         <dependency>

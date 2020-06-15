@@ -39,12 +39,6 @@ public class MessageHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 
-        if(msg instanceof QiaoQiaoHua.Model){
-            String sessionId = qConnector.getChannelSessionId(ctx);
-            QiaoQiaoHua.Model qiaoqiaohua = (QiaoQiaoHua.Model) msg;
-            MessageWrapper messageWapper = messageProxy.createMessageWapper(sessionId, qiaoqiaohua);
-            receiveMessages(ctx, messageWapper);
-        }
 
 
     }
@@ -78,22 +72,4 @@ public class MessageHandler extends ChannelInboundHandlerAdapter {
 //
 //    }
 
-    private void receiveMessages(ChannelHandlerContext hander, MessageWrapper wrapper) {
-        //设置消息来源为socket
-        wrapper.setSource(QiaoqiaoConst.ServerConfig.SOCKET);
-        if (wrapper.isConnect()) {
-            qConnector.connect(hander, wrapper);
-        } else if (wrapper.isClose()) {
-            qConnector.close(hander);
-        } else if (wrapper.isHeartbeat()) {
-            qConnector.heartbeatFromClient(hander,wrapper);
-        }else if (wrapper.isGroup()) {
-            qConnector.pushGroupMessage(wrapper);
-        }else if (wrapper.isSend()) {
-            qConnector.serverForwardMessage(wrapper.getSessionId(),wrapper);
-        } else if (wrapper.isSendReply()) {
-            qConnector.pushMessage(wrapper);
-
-        }
-    }
 }

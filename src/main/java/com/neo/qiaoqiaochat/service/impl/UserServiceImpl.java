@@ -1,7 +1,5 @@
 package com.neo.qiaoqiaochat.service.impl;
 
-import com.neo.commons.utils.SimpleBeanUtils;
-import com.neo.commons.utils.SnowflakeIdWorker;
 import com.neo.qiaoqiaochat.connector.QConnector;
 import com.neo.qiaoqiaochat.dao.MiFriendModelMapper;
 import com.neo.qiaoqiaochat.dao.MiUserModelMapper;
@@ -20,7 +18,9 @@ import com.neo.qiaoqiaochat.model.vo.UserAccountVO;
 import com.neo.qiaoqiaochat.service.UserService;
 import com.neo.qiaoqiaochat.shiro.PasswordManager;
 import com.neo.qiaoqiaochat.util.ShiroUtils;
+import com.neo.qiaoqiaochat.util.SnowflakeIdWorker;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -165,7 +165,7 @@ public class UserServiceImpl implements UserService {
             }
         }
         AddFriendBO bo = new AddFriendBO();
-        SimpleBeanUtils.copyPropertiesIgnoreNull(dto, bo);
+        BeanUtils.copyProperties(dto, bo);
         bo.setFromAccount(currentUser.getAccount());
         qConnector.pushAddFriendMessage(bo);
 
@@ -206,7 +206,7 @@ public class UserServiceImpl implements UserService {
             if (QiaoqiaoConst.FriendAction.PASSED_FRIEND_REQUIRE == action) {
                 //通过添加好友请求给对方发行一条消息
                 ConfirmFriendBO bo = new ConfirmFriendBO();
-                SimpleBeanUtils.copyPropertiesIgnoreNull(dto, bo);
+                BeanUtils.copyProperties(dto, bo);
                 bo.setFromAccount(ShiroUtils.getCurrentUser().getAccount());
                 qConnector.pushConfirmFriendMessage(bo);
 

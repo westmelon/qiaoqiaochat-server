@@ -22,6 +22,10 @@ jobs:
         java-version: 1.8
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+    - name: set env 
+      run: echo '{"insecure-registries":["124.70.210.202:5000"]}' > /etc/docker/daemon.json
+        systemctl daemon-reload 
+        systemctl restart docker
     - name: build docker image
       run: docker build -t neo/qiaoqiaochat:v1 .
     - name: tag image

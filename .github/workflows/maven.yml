@@ -30,3 +30,10 @@ jobs:
       run: ${{ secrets.LOGIN_COMMAND }}
     - name: push image
       run: docker push swr.cn-east-3.myhuaweicloud.com/neo/qiaoqiaochat:v1
+    - uses: webfactory/ssh-agent@v0.1.1
+      with:
+        ssh-private-key: ${{ secrets.ID_RSA }}
+    - name: Setup knownhosts
+      run: ssh-keyscan 124.70.210.202 >> ~/.ssh/known_hosts
+    - name: Run SSH Command
+      run: ssh github@124.70.210.202 "sh run.sh"

@@ -23,10 +23,10 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
     - name: build docker image
-      run: docker build -t neo/qiaoqiaochat:v1 .
+      run: docker build -t qiaoqiaochat:v1 .
     - name: tag image
-      run: docker tag  neo/qiaoqiaochat:v1 124.70.210.202:5000/neo/qiaoqiaochat:v1
-    - name: set env
-      run: dockerd --insecure-registry 124.70.210.202:5000
+      run: docker tag  qiaoqiaochat:v1 swr.cn-east-3.myhuaweicloud.com/neo/qiaoqiaochat:v1
+    - name: login
+      run: ${{ secrets.LOGIN_COMMAND }}
     - name: push image
-      run: docker push 124.70.210.202:5000/neo/qiaoqiaochat:v1
+      run: docker push swr.cn-east-3.myhuaweicloud.com/neo/qiaoqiaochat:v1

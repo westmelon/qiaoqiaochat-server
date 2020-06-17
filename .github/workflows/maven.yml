@@ -27,4 +27,5 @@ jobs:
     - name: tag image
       run: docker tag  neo/qiaoqiaochat:v1 124.70.210.202:5000/neo/qiaoqiaochat:v1
     - name: push image
-      run: docker push --insecure-registry 124.70.210.202:5000 124.70.210.202:5000/neo/qiaoqiaochat:v1
+      run: dockerd --insecure-registry 124.70.210.202:5000
+        docker push 124.70.210.202:5000/neo/qiaoqiaochat:v1

@@ -41,8 +41,8 @@ public class MessageProxyImpl implements MessageProxy {
             case CONNECT:
                 //首次连接时候生成SessionId
                 //TODO
-                String sessionId0 = UUID.randomUUID().toString();
-                wrapper = new MessageWrapper(MessageWrapper.MessageProtocol.CONNECT, sessionId0, "", qiaoqiaohua);
+//                String sessionId0 = UUID.randomUUID().toString();
+                wrapper = new MessageWrapper(MessageWrapper.MessageProtocol.CONNECT, "", "", qiaoqiaohua);
                 break;
             case CLOSE:
                 wrapper = null;

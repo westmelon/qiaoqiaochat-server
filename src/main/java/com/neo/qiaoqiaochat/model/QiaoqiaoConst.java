@@ -6,7 +6,7 @@ public class QiaoqiaoConst {
 
 
     public static interface ServerConfig {
-        public static final int SERVER_CONNET_TIMEOUT = 10;
+        public static final int SERVER_CONNET_TIMEOUT = 30;
         public static final int WRITE_IDLE_TIMEOUT = 10;
         public static final int READ_IDLE_TIMEOUT = 10;
         public static final int ALL_IDLE_TIMEOUT = 20;

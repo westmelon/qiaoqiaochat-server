@@ -51,7 +51,10 @@ public class AuthController {
         //验证登录成功以后 把用户账号 和token放入缓存中
         loginService.login(dto);
         loginService.doAfterLogin(dto.getAccount());
-        return new SimpleResult();
+        TokenVO tokenVO = authService.getTokenVO(dto.getAccount());
+        SimpleResult simpleResult = new SimpleResult();
+        simpleResult.setData(tokenVO);
+        return simpleResult;
     }
 
     /**

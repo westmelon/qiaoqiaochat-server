@@ -113,8 +113,8 @@ public class QiaoqiaoWebSocketServer {
                                 }
                             });
                             pipeline.addLast("decoder", decoder);
-//                            pipeline.addLast(new IdleStateHandler(QiaoqiaoConst.ServerConfig.READ_IDLE_TIMEOUT,
-//                                    QiaoqiaoConst.ServerConfig.WRITE_IDLE_TIMEOUT, QiaoqiaoConst.ServerConfig.ALL_IDLE_TIMEOUT));
+                            pipeline.addLast(new IdleStateHandler(QiaoqiaoConst.ServerConfig.READ_IDLE_TIMEOUT,
+                                    QiaoqiaoConst.ServerConfig.WRITE_IDLE_TIMEOUT, QiaoqiaoConst.ServerConfig.ALL_IDLE_TIMEOUT));
                             pipeline.addLast(webSocketHandler);
 //                            pipeline.addLast(new TextWebSocketFrameHandler());
                         }

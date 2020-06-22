@@ -40,11 +40,13 @@ public class QiaoConnector implements QConnector {
         ctx.channel().attr(AttributeKey.valueOf(QiaoqiaoConst.SessionConfig.HEARTBEAT_KEY)).set(System.currentTimeMillis());
     }
 
+
+
     @Override
     public void heartbeatToClient(ChannelHandlerContext ctx) {
         String sessionId = getChannelSessionId(ctx);
         QiaoQiaoHua.Model.Builder builder = QiaoQiaoHua.Model.newBuilder();
-        MessageWrapper serverMessage = messageProxy.createServerMessage(sessionId, builder, MiCommand.HEARTBEAT, null);
+        MessageWrapper serverMessage = messageProxy.createServerMessage(sessionId, builder, MiCommand.HEARTBEAT, MiMessageType.SEND);
 
         Session session = nettySessionManager.getSession(sessionId);
         SessionProxy proxy = new SessionProxy(session);
@@ -175,10 +177,15 @@ public class QiaoConnector implements QConnector {
     }
 
     @Override
-    public void close(ChannelHandlerContext hander) {
-        String sessionId = getChannelSessionId(hander);
-        if (!StringUtils.isEmpty(sessionId)) {
-            close(sessionId);
+    public void close(ChannelHandlerContext handler) {
+        String sessionId = getChannelSessionId(handler);
+        try {
+            if (!StringUtils.isEmpty(sessionId)) {
+                close(sessionId);
+            }
+        }finally {
+            //关闭通道
+            handler.channel().close();
         }
     }
 
@@ -188,7 +195,7 @@ public class QiaoConnector implements QConnector {
         QiaoQiaoHua.Model body = (QiaoQiaoHua.Model) wrapper.getBody();
         String token = body.getToken();
         String sender = body.getSender();
-        authService.checkTokenValid(token, sender);
+//        authService.checkTokenValid(token, sender);
 
         //当用户登录后首次连接
         String sessionId = wrapper.getSessionId();
@@ -202,10 +209,10 @@ public class QiaoConnector implements QConnector {
             //session 中保存用户信息
             Session session = nettySessionManager.createSession(wrapper, ctx);
 
-            nettySessionManager.addSession(sessionId, session);
+            nettySessionManager.addSession(session.getSessionId(), session);
             nettySessionManager.bindSessionIdsToAccount(sender, sessionId);
 
-            setChannelSessionId(ctx, sessionId);
+            setChannelSessionId(ctx, session.getSessionId());
             logger.info("create channel attr sessionId " + sessionId + " successful, ctx -> " + ctx.toString());
         }
         QiaoQiaoHua.Model.Builder builder = QiaoQiaoHua.Model.newBuilder();

@@ -1,6 +1,7 @@
 package com.neo.qiaoqiaochat.session;
 
 
+import com.neo.qiaoqiaochat.cache.LocalCache;
 import com.neo.qiaoqiaochat.config.InitApp;
 import com.neo.qiaoqiaochat.config.redis.RedisCache;
 import com.neo.qiaoqiaochat.config.redis.RedisCacheManager;
@@ -25,7 +26,7 @@ public class NettySessionManager {
     /**
      * sessionId与netty session 的缓存
      */
-    private final Cache<String, Session> sessionCache;
+    private final LocalCache<String, Session> sessionCache;
 
     /**
      * 用户账号与netty session列表对应关系
@@ -34,7 +35,7 @@ public class NettySessionManager {
 
     @Autowired
     public NettySessionManager(RedisCacheManager cacheManager) {
-        sessionCache = cacheManager.getCache(QiaoqiaoConst.RedisCacheConfig.NETTY_SESSION_NAMESPACE);
+        sessionCache = new LocalCache();
         accountSessionIdsCache = cacheManager.getCache(QiaoqiaoConst.RedisCacheConfig.ACCOUNT_SESSIONIDS);
 
     }
@@ -111,6 +112,7 @@ public class NettySessionManager {
         //TODO 生成一个会话id
 //        String sender = message.getSender();
         Session session = new Session();
+        session.setAccount("111");
         session.setSessionId(UUID.randomUUID().toString());
         session.setChannel(ctx.channel());
         session.setCreateSessionTime(System.currentTimeMillis());

@@ -16,6 +16,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 @ChannelHandler.Sharable
 public class MessageWebSocketHandler extends SimpleChannelInboundHandler<QiaoQiaoHua.Model> {
@@ -93,25 +95,30 @@ public class MessageWebSocketHandler extends SimpleChannelInboundHandler<QiaoQia
 
     }
 
-    private void receiveMessages(ChannelHandlerContext hander, MessageWrapper wrapper) {
+    private void receiveMessages(ChannelHandlerContext hander, MessageWrapper messageWrapper) {
         //设置消息来源为socket
-        wrapper.setSource(QiaoqiaoConst.ServerConfig.SOCKET);
-        if (wrapper.isConnect()) {
-            qConnector.connect(hander, wrapper);
-        } else if (wrapper.isClose()) {
-            qConnector.close(hander);
-        } else if (wrapper.isHeartbeat()) {
-            qConnector.heartbeatFromClient(hander, wrapper);
-        } else if (wrapper.isGroup()) {
-            qConnector.pushGroupMessage(wrapper);
-        } else if (wrapper.isSend()) {
-            //用户点对点发送消息
-            qConnector.serverForwardMessage(wrapper.getSessionId(), wrapper);
-        } else if (wrapper.isSendReply()) {
-            //客户端接收应答
-            qConnector.pushMessage(wrapper);
+        Optional<MessageWrapper> optional = Optional.ofNullable(messageWrapper);
 
-        }
+        optional.ifPresent(wrapper ->{
+            wrapper.setSource(QiaoqiaoConst.ServerConfig.SOCKET);
+            if (wrapper.isConnect()) {
+                qConnector.connect(hander, wrapper);
+            } else if (wrapper.isClose()) {
+                qConnector.close(hander);
+            } else if (wrapper.isHeartbeat()) {
+                qConnector.heartbeatFromClient(hander, wrapper);
+            } else if (wrapper.isGroup()) {
+                qConnector.pushGroupMessage(wrapper);
+            } else if (wrapper.isSend()) {
+                //用户点对点发送消息
+                qConnector.serverForwardMessage(wrapper.getSessionId(), wrapper);
+            } else if (wrapper.isSendReply()) {
+                //客户端接收应答
+                qConnector.pushMessage(wrapper);
+
+            }
+        });
+
     }
 
 

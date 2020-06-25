@@ -24,7 +24,8 @@ public interface MessageProxy {
     MessageWrapper createServerMessage(String reSession, QiaoQiaoHua.Model.Builder qiaoqiaohuaBuilder, MiCommand command, MiMessageType messageType);
 
     /**
-     * 生成服务端消息  场景1服务器接收到消息后生成应答消息
+     * 生成服务端消息
+     * 场景1服务器接收到消息后生成应答消息
      * 场景2 服务器生成消息通知用户
      **/
     MessageWrapper createServerMessage(List<String> reSessions, QiaoQiaoHua.Model.Builder qiaoqiaohuaBuilder, MiCommand command, MiMessageType messageType);

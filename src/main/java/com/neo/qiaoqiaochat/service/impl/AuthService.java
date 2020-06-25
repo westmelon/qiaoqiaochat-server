@@ -1,11 +1,13 @@
 package com.neo.qiaoqiaochat.service.impl;
 
 import com.google.gson.Gson;
+import com.neo.qiaoqiaochat.config.Audience;
 import com.neo.qiaoqiaochat.config.redis.RedisCacheManager;
 import com.neo.qiaoqiaochat.exception.BusinessException;
 import com.neo.qiaoqiaochat.model.QiaoqiaoConst;
 import com.neo.qiaoqiaochat.model.ResultCode;
 import com.neo.qiaoqiaochat.model.vo.TokenVO;
+import com.neo.qiaoqiaochat.util.JwtUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.cache.Cache;
 import org.slf4j.Logger;
@@ -23,7 +25,8 @@ public class AuthService {
     @Autowired
     private RedisCacheManager cacheManager;
 
-
+    @Autowired
+    private Audience audience;
 
 
     public TokenVO getTokenVO(String account){
@@ -34,11 +37,13 @@ public class AuthService {
     }
 
     //验证token的有效性
-    public TokenVO checkTokenValid(String token, String account) {
+    public TokenVO checkTokenValid(String token) {
         Cache<String, String> cache = cacheManager.getCache(QiaoqiaoConst.RedisCacheConfig.ACCOUNT_TOKEN);
+
+        String account = JwtUtils.parseJWT(token, audience.getBase64Secret());
         String cachedToken = cache.get(account);
         logger.info("比较token，参数中的{}，缓存的{}",token,cachedToken);
-        TokenVO tokenVo = null;
+        TokenVO tokenVo = new TokenVO();
         if (!token.equals(cachedToken)) {
             logger.info("token对比不一致");
             throw new BusinessException(ResultCode.ACCESS_DENIED);
@@ -48,6 +53,8 @@ public class AuthService {
             logger.info("比较token，参数中的{}，缓存的{}",token,cachedToken);
             throw new BusinessException(ResultCode.ACCESS_DENIED);
         }
+        tokenVo.setToken(token);
+        tokenVo.setAccount(account);
         return tokenVo;
     }
 
@@ -67,40 +74,16 @@ public class AuthService {
             return cachedToken;
         }
 
-        //生成新的token TODO 使用新的算法生成token
-        String token = UUID.randomUUID().toString();
+        //生成新的token
+        String token = JwtUtils.buildJWT(account, audience );
         cache.put(account, token);
         return token;
     }
 
     private boolean tokenValid(String token, String account){
+        String decode = JwtUtils.parseJWT(token, audience.getBase64Secret());
 
-        return true;
-//        String temp = "";
-//        try {
-//            temp = new String(CryptManager.getIns().des3Decrypt(CryptManager.hexToBytes(token),
-//                    CryptManager.hexToBytes(myAppConfig.getGdzsKey())), "UTF-8");
-//        } catch (Exception e) {
-//            logger.error("token[{}]解密失败",token);
-//            logger.error("解密失败原因",e);
-//        }
-//        if (StringUtils.isBlank(temp)) {
-//            return null;
-//        }
-//        Gson gson = new Gson();
-//        TokenVo tokenVo = gson.fromJson(temp, TokenVo.class);
-//        String cachedNsrsbh = tokenVo.getNsrsbh();
-//        Long cachedTime = tokenVo.getTimestamp();
-//        if (!nsrsbh.equals(cachedNsrsbh)) {
-//            logger.error("token[{}]验证纳税人识别号{}失败",token, nsrsbh);
-//            return null;
-//        }
-//        Long now = System.currentTimeMillis();
-//        long expired = now - cachedTime;
-//        if(expired > MyAppConfig.tokenExpire*1000){
-//            logger.error("token[{}]已失效",token);
-//            return null;
-//        }
-//        return tokenVo;
+        return decode.equals(account);
+
     }
 }

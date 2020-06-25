@@ -7,6 +7,7 @@ import com.neo.qiaoqiaochat.model.bo.ConfirmFriendBO;
 import com.neo.qiaoqiaochat.model.emun.MiCommand;
 import com.neo.qiaoqiaochat.model.emun.MiMessageType;
 import com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua;
+import com.neo.qiaoqiaochat.model.vo.TokenVO;
 import com.neo.qiaoqiaochat.proxy.MessageProxy;
 import com.neo.qiaoqiaochat.service.impl.AuthService;
 import com.neo.qiaoqiaochat.session.Session;
@@ -66,32 +67,7 @@ public class QiaoConnector implements QConnector {
         }
     }
 
-    /**
-     * 服务端接收到用户间的消息进行转发
-     *
-     * @param sessionId the session id
-     * @param wrapper   the wrapper
-     */
-    @Override
-    public void serverForwardMessage(String sessionId, MessageWrapper wrapper) {
-        //TODO 此处sessionId似乎没卵用啊
-        Session session = nettySessionManager.getSession(sessionId);
-        if (session != null) {
-            //发送消息
-            List<String> reSessionIds = wrapper.getReSessionIds();
-            List<Session> sessions = nettySessionManager.getSessions(reSessionIds);
-            SessionProxy proxy = new SessionProxy(sessions);
-            boolean writeSuccess = proxy.write(wrapper.getBody());
 
-            if (writeSuccess) {
-                messageProxy.saveOnlineMessageToDB(wrapper);
-            } else {
-                messageProxy.saveOfflineMessageToDB(wrapper);
-            }
-        } else { //用户当前不在线
-            messageProxy.saveOfflineMessageToDB(wrapper);
-        }
-    }
 
     /**
      * 服务端直接推送消息
@@ -104,7 +80,7 @@ public class QiaoConnector implements QConnector {
         List<Session> sessions = nettySessionManager.getSessions(reSessionIds);
         SessionProxy proxy = new SessionProxy(sessions);
         boolean writeSuccess = proxy.write(wrapper.getBody());
-
+        System.out.println(wrapper.getBody().toString());
         if (writeSuccess) {
             messageProxy.saveOnlineMessageToDB(wrapper);
         } else {
@@ -194,8 +170,7 @@ public class QiaoConnector implements QConnector {
         //验证token TODO 是否可以放入统一的权限验证处理器中去做
         QiaoQiaoHua.Model body = (QiaoQiaoHua.Model) wrapper.getBody();
         String token = body.getToken();
-        String sender = body.getSender();
-//        authService.checkTokenValid(token, sender);
+        TokenVO tokenVO = authService.checkTokenValid(token);
 
         //当用户登录后首次连接
         String sessionId = wrapper.getSessionId();
@@ -210,13 +185,13 @@ public class QiaoConnector implements QConnector {
             Session session = nettySessionManager.createSession(wrapper, ctx);
 
             nettySessionManager.addSession(session.getSessionId(), session);
-            nettySessionManager.bindSessionIdsToAccount(sender, sessionId);
+            nettySessionManager.bindSessionIdsToAccount(tokenVO.getAccount(), session.getSessionId());
 
             setChannelSessionId(ctx, session.getSessionId());
             logger.info("create channel attr sessionId " + sessionId + " successful, ctx -> " + ctx.toString());
         }
         QiaoQiaoHua.Model.Builder builder = QiaoQiaoHua.Model.newBuilder();
-        builder.setReceiver(sender);
+        builder.setReceiver(tokenVO.getAccount());
         MessageWrapper serverMessage = messageProxy.createServerMessage(sessionId, builder, MiCommand.MESSAGE, MiMessageType.SEND_REPLY);
         pushMessage(serverMessage);
     }

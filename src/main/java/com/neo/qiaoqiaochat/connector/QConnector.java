@@ -5,6 +5,8 @@ import com.neo.qiaoqiaochat.model.bo.AddFriendBO;
 import com.neo.qiaoqiaochat.model.bo.ConfirmFriendBO;
 import io.netty.channel.ChannelHandlerContext;
 
+import java.util.List;
+
 /**
  * The interface Q connector.
  */
@@ -34,14 +36,13 @@ public interface QConnector {
      */
     void pushMessage(MessageWrapper wrapper);
 
+
+
     /**
-     * 服务端转发消息
+     * 服务端发送消息
      *
-     * @param sessionId the session id
      * @param wrapper   the wrapper
      */
-    void serverForwardMessage(String sessionId, MessageWrapper wrapper);
-
     void serverPushMessage(MessageWrapper wrapper);
 
     /**

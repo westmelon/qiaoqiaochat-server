@@ -111,7 +111,7 @@ public class MessageWebSocketHandler extends SimpleChannelInboundHandler<QiaoQia
                 qConnector.pushGroupMessage(wrapper);
             } else if (wrapper.isSend()) {
                 //用户点对点发送消息
-                qConnector.serverForwardMessage(wrapper.getSessionId(), wrapper);
+                qConnector.serverPushMessage(wrapper);
             } else if (wrapper.isSendReply()) {
                 //客户端接收应答
                 qConnector.pushMessage(wrapper);

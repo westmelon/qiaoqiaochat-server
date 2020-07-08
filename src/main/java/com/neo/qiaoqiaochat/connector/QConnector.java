@@ -34,7 +34,7 @@ public interface QConnector {
      *
      * @param wrapper the wrapper
      */
-    void pushMessage(MessageWrapper wrapper);
+    void replyMessage(MessageWrapper wrapper);
 
 
 
@@ -92,6 +92,8 @@ public interface QConnector {
      * @param wrapper the wrapper
      */
     void connect(ChannelHandlerContext ctx, MessageWrapper wrapper);
+
+    void replyMessageFromClient(ChannelHandlerContext ctx, MessageWrapper wrapper);
 
     /**
      * 获取channel的sessionid

@@ -95,18 +95,21 @@ public class MessageWebSocketHandler extends SimpleChannelInboundHandler<QiaoQia
 
     }
 
-    private void receiveMessages(ChannelHandlerContext hander, MessageWrapper messageWrapper) {
+    private void receiveMessages(ChannelHandlerContext ctx, MessageWrapper messageWrapper) {
         //设置消息来源为socket
         Optional<MessageWrapper> optional = Optional.ofNullable(messageWrapper);
 
         optional.ifPresent(wrapper ->{
+            //只要接收到一次消息就更新心跳事件
+            ctx.channel().attr(QiaoqiaoConst.SessionConfig.SERVER_SESSION_HEARTBEAT).set(System.currentTimeMillis());
             wrapper.setSource(QiaoqiaoConst.ServerConfig.SOCKET);
             if (wrapper.isConnect()) {
-                qConnector.connect(hander, wrapper);
+                qConnector.connect(ctx, wrapper);
             } else if (wrapper.isClose()) {
-                qConnector.close(hander);
+                qConnector.close(ctx);
             } else if (wrapper.isHeartbeat()) {
-                qConnector.heartbeatFromClient(hander, wrapper);
+                logger.info("heartbeat!!!");
+                qConnector.heartbeatFromClient(ctx, wrapper);
             } else if (wrapper.isGroup()) {
                 qConnector.pushGroupMessage(wrapper);
             } else if (wrapper.isSend()) {
@@ -114,8 +117,9 @@ public class MessageWebSocketHandler extends SimpleChannelInboundHandler<QiaoQia
                 qConnector.serverPushMessage(wrapper);
             } else if (wrapper.isSendReply()) {
                 //客户端接收应答
-                qConnector.pushMessage(wrapper);
-
+//                qConnector.pushMessage(wrapper);
+                //todo
+                logger.info("接收到客户端应答消息");
             }
         });
 

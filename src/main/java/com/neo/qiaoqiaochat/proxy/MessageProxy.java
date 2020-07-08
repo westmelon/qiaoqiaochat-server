@@ -13,7 +13,7 @@ import java.util.List;
 public interface MessageProxy {
 
     /**
-     * 包装客户端请求消息
+     * 封装客户端请求消息
      *
      * @param sessionId   the session id
      * @param qiaoqiaohua the qiaoqiaohua
@@ -21,6 +21,14 @@ public interface MessageProxy {
      */
     MessageWrapper createMessageWapper(String sessionId, QiaoQiaoHua.Model qiaoqiaohua);
 
+    /**
+     * 封装服务端消息
+     * @param reSession
+     * @param qiaoqiaohuaBuilder
+     * @param command
+     * @param messageType
+     * @return
+     */
     MessageWrapper createServerMessage(String reSession, QiaoQiaoHua.Model.Builder qiaoqiaohuaBuilder, MiCommand command, MiMessageType messageType);
 
     /**

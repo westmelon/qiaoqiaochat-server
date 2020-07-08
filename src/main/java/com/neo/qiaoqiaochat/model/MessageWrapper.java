@@ -1,5 +1,7 @@
 package com.neo.qiaoqiaochat.model;
 
+import com.neo.qiaoqiaochat.model.protobuf.QiaoQiaoHua;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,11 +39,11 @@ public class MessageWrapper implements Serializable {
 
     private int source;
 
-    private Object body;
+    private QiaoQiaoHua.Model body;
 
     private MessageProtocol protocol;
 
-    public MessageWrapper(MessageProtocol protocol, String sessionId, String reSessionId, Object body) {
+    public MessageWrapper(MessageProtocol protocol, String sessionId, String reSessionId, QiaoQiaoHua.Model body) {
         this.reSessionIds = new ArrayList<>();
         this.protocol = protocol;
         this.sessionId = sessionId;
@@ -49,7 +51,7 @@ public class MessageWrapper implements Serializable {
         this.body = body;
     }
 
-    public MessageWrapper(MessageProtocol protocol, String sessionId, List<String> reSessionIds, Object body) {
+    public MessageWrapper(MessageProtocol protocol, String sessionId, List<String> reSessionIds, QiaoQiaoHua.Model body) {
         this.reSessionIds = new ArrayList<>();
         this.protocol = protocol;
         this.sessionId = sessionId;
@@ -71,11 +73,11 @@ public class MessageWrapper implements Serializable {
         return reSessionIds;
     }
 
-    public Object getBody() {
+    public QiaoQiaoHua.Model getBody() {
         return body;
     }
 
-    public void setBody(Object body) {
+    public void setBody(QiaoQiaoHua.Model body) {
         this.body = body;
     }
 

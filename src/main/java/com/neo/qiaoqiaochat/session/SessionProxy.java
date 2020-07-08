@@ -35,6 +35,7 @@ public class SessionProxy {
         for(Session session : sessions){
             if (isConnect(session)) {
                 Channel channel = session.getChannel();
+                System.out.println(msg.toString());
                 boolean b = channel.writeAndFlush(msg).awaitUninterruptibly(5000);
                 hasSuccess |= b;
             }

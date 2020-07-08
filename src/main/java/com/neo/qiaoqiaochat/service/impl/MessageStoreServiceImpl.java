@@ -33,7 +33,7 @@ public class MessageStoreServiceImpl implements MessageStoreService {
     @Override
 //    @Transactional(rollbackFor = Exception.class)
     public void saveOfflineMessageToDB(MessageWrapper wrapper) {
-        QiaoQiaoHua.Model model = (QiaoQiaoHua.Model) wrapper.getBody();
+        QiaoQiaoHua.Model model = wrapper.getBody();
         String contentType = model.getContentType();
         MiMessageOfflineModel offlineModel = new MiMessageOfflineModel();
         long id = idWorker.nextId();

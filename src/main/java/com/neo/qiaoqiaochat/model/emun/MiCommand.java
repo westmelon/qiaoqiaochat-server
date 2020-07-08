@@ -30,7 +30,11 @@ public enum  MiCommand {
     /**
      * 消息
      */
-    MESSAGE(5);
+    MESSAGE(5),
+    /**
+     * 回应
+     */
+    ECHO(6);
 
     private final int code;
 

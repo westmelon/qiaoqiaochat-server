@@ -38,9 +38,8 @@ public class QiaoConnector implements QConnector {
     @Override
     public void heartbeatFromClient(ChannelHandlerContext ctx, MessageWrapper wrapper) {
         //接受到客户端消息后 刷新心跳最新时间
-        ctx.channel().attr(AttributeKey.valueOf(QiaoqiaoConst.SessionConfig.HEARTBEAT_KEY)).set(System.currentTimeMillis());
+//        ctx.channel().attr(AttributeKey.valueOf(QiaoqiaoConst.SessionConfig.HEARTBEAT_KEY)).set(System.currentTimeMillis());
     }
-
 
 
     @Override
@@ -56,17 +55,13 @@ public class QiaoConnector implements QConnector {
 
 
     @Override
-    public void pushMessage(MessageWrapper wrapper) {
+    public void replyMessage(MessageWrapper wrapper) {
         //服务器接收到消息的回执信息
-        String sessionId = wrapper.getSessionId();
-        Session session = nettySessionManager.getSession(sessionId);
-        if (session != null) {
-            //todo
-            SessionProxy proxy = new SessionProxy(session);
-            proxy.write(wrapper.getBody());
-        }
+        List<String> reSessionIds = wrapper.getReSessionIds();
+        List<Session> sessions = nettySessionManager.getSessions(reSessionIds);
+        SessionProxy proxy = new SessionProxy(sessions);
+        boolean writeSuccess = proxy.write(wrapper.getBody());
     }
-
 
 
     /**
@@ -122,11 +117,11 @@ public class QiaoConnector implements QConnector {
 
         MiMessageType messageType = null;
         String contentType = null;
-        if(QiaoqiaoConst.FriendAction.PASSED_FRIEND_REQUIRE == bo.getAction()){
+        if (QiaoqiaoConst.FriendAction.PASSED_FRIEND_REQUIRE == bo.getAction()) {
             messageType = MiMessageType.ADD_FRIEND;
             contentType = QiaoqiaoConst.MessageContentType.PASSED_FRIEND_REQUIRE;
         } else if (QiaoqiaoConst.FriendAction.REFUSE_FRIEND_REQUIRE == bo.getAction() ||
-                QiaoqiaoConst.FriendAction.BLACK_FRIEND_REQUIRE == bo.getAction()){
+                QiaoqiaoConst.FriendAction.BLACK_FRIEND_REQUIRE == bo.getAction()) {
             messageType = MiMessageType.REFUSE_FRIEND;
             contentType = QiaoqiaoConst.MessageContentType.REFUSE_FRIEND_REQUIRE;
         } else {
@@ -159,7 +154,7 @@ public class QiaoConnector implements QConnector {
             if (!StringUtils.isEmpty(sessionId)) {
                 close(sessionId);
             }
-        }finally {
+        } finally {
             //关闭通道
             handler.channel().close();
         }
@@ -168,7 +163,7 @@ public class QiaoConnector implements QConnector {
     @Override
     public void connect(ChannelHandlerContext ctx, MessageWrapper wrapper) {
         //验证token TODO 是否可以放入统一的权限验证处理器中去做
-        QiaoQiaoHua.Model body = (QiaoQiaoHua.Model) wrapper.getBody();
+        QiaoQiaoHua.Model body = wrapper.getBody();
         String token = body.getToken();
         TokenVO tokenVO = authService.checkTokenValid(token);
 
@@ -190,10 +185,20 @@ public class QiaoConnector implements QConnector {
             setChannelSessionId(ctx, session.getSessionId());
             logger.info("create channel attr sessionId " + sessionId + " successful, ctx -> " + ctx.toString());
         }
+        replyMessageFromClient(ctx, wrapper);
+    }
+
+
+    @Override
+    public void replyMessageFromClient(ChannelHandlerContext ctx, MessageWrapper wrapper) {
+        String sessionId = getChannelSessionId(ctx);
+        //接收到的消息
+        QiaoQiaoHua.Model received = wrapper.getBody();
+
         QiaoQiaoHua.Model.Builder builder = QiaoQiaoHua.Model.newBuilder();
-        builder.setReceiver(tokenVO.getAccount());
-        MessageWrapper serverMessage = messageProxy.createServerMessage(sessionId, builder, MiCommand.MESSAGE, MiMessageType.SEND_REPLY);
-        pushMessage(serverMessage);
+        builder.setResponseId(received.getRequestId());
+        MessageWrapper serverMessage = messageProxy.createServerMessage(sessionId, builder, MiCommand.ECHO, MiMessageType.SEND_REPLY);
+        replyMessage(serverMessage);
     }
 
 

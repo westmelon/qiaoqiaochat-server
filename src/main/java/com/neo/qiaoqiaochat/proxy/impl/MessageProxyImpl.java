@@ -107,7 +107,10 @@ public class MessageProxyImpl implements MessageProxy {
     @Override
     public MessageWrapper createServerMessage(List<String> reSessions, QiaoQiaoHua.Model.Builder builder, MiCommand command, MiMessageType messageType) {
         builder.setCmd(command.getCode());
-        builder.setMsgType(messageType.getCode());
+//        builder.setMsgType(messageType.getCode());
+        builder.setRequestId(UUID.randomUUID().toString());
+        builder.setTimestamp(System.currentTimeMillis());
+        builder.setEncryptionType(1);
         String sender = builder.getSender();
         String receiver = builder.getReceiver();
         Long receiverId = userService.getUserIdByAccount(receiver);

@@ -1,0 +1,13 @@
+spring:
+  cloud:
+    nacos:
+      config:
+        server-addr: 124.70.210.202:8848
+        namespace: e571b4ce-0995-4ede-853c-254ef0c57267
+        file-extension: yml
+        extension-configs:
+          - {data-id: app.yml,group: DEFAULT_GROUP,refresh: true}
+          - {data-id: datasource.yml,group: DEFAULT_GROUP}
+          - {data-id: redis.yml,group: DEFAULT_GROUP}
+
+

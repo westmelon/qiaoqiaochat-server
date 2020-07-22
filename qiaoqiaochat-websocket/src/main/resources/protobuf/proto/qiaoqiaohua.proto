@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option java_package = "com.neo.qiaoqiaochat.model.protobuf";
+option java_outer_classname = "QiaoQiaoHua";
+message Model {
+  uint32 cmd = 1;
+  uint32 msgType = 2;
+  uint64 timestamp = 3;
+
+  string textContent = 4;
+  string contentType = 5;
+  bytes mediaContent = 6;
+
+  string groupId = 7;
+  string sender = 8;
+  string receiver = 9;
+
+  string token = 10;
+  string appKey = 11;
+  string sign = 12;
+
+  string requestId = 13;
+  string responseId = 14;
+  string uniqueId = 15;
+  string identifier = 16;
+
+  uint32 clientType = 17;
+  string clientVersion = 18;
+  uint32 encryptionType = 19;
+
+}

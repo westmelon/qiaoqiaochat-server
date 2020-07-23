@@ -122,7 +122,6 @@ public class UserServiceImpl implements UserService {
         insert.setOpenid("");
         insert.setAccount(account);
         insert.setNickName(dto.getNickName());
-        insert.setSex(dto.getSex());
         insert.setIntroduce(dto.getIntroduce());
         //加密密码
         Date now = new Date();

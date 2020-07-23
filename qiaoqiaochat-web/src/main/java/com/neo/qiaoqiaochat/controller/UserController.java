@@ -38,21 +38,13 @@ public class UserController {
         this.request = request;
     }
 
+
     /**
-     * showdoc
-     * @catalog 接口API/用户相关
-     * @title 用户注册
-     * @description 用户注册的接口
-     * @method post
-     * @url https://xx/user/friend/add
-     * @param account 必选 string 账号
-     * @param nickName 必选 string 昵称
-     * @param sex 非必选 string 性别
-     * @param introduce 非必选 string 介绍
-     * @param password 必选 string 密码
-     *
-     * @remark 这里是备注信息
-     * @number 1
+     * 用户注册
+     * @author linyi
+     * @date 2020/7/23 17:47
+     * @param dto the dto
+     * @return
      */
     @PostMapping("register")
     public SimpleResult register(@Valid @RequestBody UserRegisterDTO dto ){
@@ -61,19 +53,12 @@ public class UserController {
     }
 
 
-
     /**
-     * showdoc
-     * @catalog 接口API/用户相关
-     * @title 添加好友
-     * @description 添加好友的接口
-     * @method post
-     * @url https://xx/user/friend/add
-     * @param account 必选 string 添加的账号
-     * @param secretSignal 必选 string 验证消息
-     *
-     * @remark 这里是备注信息
-     * @number 2
+     * 添加好友
+     * @author linyi
+     * @date 2020/7/23 17:49
+     * @param dto the dto
+     * @return
      */
     @PostMapping(value = "friend/add")
     public SimpleResult addFriend(@Valid @RequestBody AddFriendDTO dto)  {
@@ -84,17 +69,11 @@ public class UserController {
     }
 
     /**
-     * showdoc
-     * @catalog 接口API/用户相关
-     * @title 添加好友确认
-     * @description 添加好友确认的接口
-     * @method post
-     * @url https://xx/user/friend/confirm
-     * @param account 必选 string 账号
-     * @param remark 非必选 string 备注
-     *
-     * @remark 这里是备注信息
-     * @number 3
+     * 添加好友确认
+     * @author linyi
+     * @date 2020/7/23 17:48
+     * @param dto the dto
+     * @return
      */
     @PostMapping("friend/confirm")
     public SimpleResult confirmFriend(@Valid @RequestBody ConfirmFriendDTO dto) {
@@ -102,23 +81,12 @@ public class UserController {
         return new SimpleResult();
     }
 
-    /**
-     * showdoc
-     * @catalog 接口API/用户相关
-     * @title 获取好友列表
-     * @description 获取好友列表的接口
-     * @method post
-     * @url https://xx/user/friend/confirm
-     * @return_param  account string 账号
-     * @return_param  nickName string 昵称
-     * @return_param  remark  string 好友备注
-     * @return_param  headImageIndex  string 头像地址
-     * @return_param  relationIndex  int 好友关系
-     * @return_param  msgReceiveSetting  int 消息接收策略
-     *
-     * @remark 这里是备注信息
-     * @number 4
-     */
+   /**
+    * 获取好友列表
+    * @author linyi
+    * @date 2020/7/23 17:49
+    * @return
+    */
     @PostMapping("friend/list")
     public SimpleResult getFriendList(){
         SimpleResult<List> result = new SimpleResult<>();

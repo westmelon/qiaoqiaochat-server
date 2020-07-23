@@ -120,6 +120,12 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.github.yedaxia</groupId>
+            <artifactId>japidocs</artifactId>
+            <version>1.4.1</version>
+            <scope>test</scope>
+        </dependency>
 
     </dependencies>
 

@@ -1,60 +1,40 @@
 package com.neo.qiaoqiaochat.model.dto;
 
 
+import lombok.Data;
+
 import javax.validation.constraints.NotEmpty;
 
+/**
+ * 用户注册请求参数
+ *
+ * @author Neo Lin
+ * @date 2020 /7/23 17:21
+ */
+@Data
 public class UserRegisterDTO {
 
+    /**
+     * 账号
+     */
     @NotEmpty(message = "账号不能为空")
     private String account;
 
+    /**
+     * 昵称
+     */
     @NotEmpty(message = "昵称不能为空")
     private String nickName;
 
-    private String sex;
-
+    /**
+     * 简介
+     */
     private String introduce;
 
+    /**
+     * 密码
+     */
     @NotEmpty(message = "密码不能为空")
     private String password;
 
-    public String getAccount() {
-        return account;
-    }
-
-    public void setAccount(String account) {
-        this.account = account;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public String getIntroduce() {
-        return introduce;
-    }
-
-    public void setIntroduce(String introduce) {
-        this.introduce = introduce;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

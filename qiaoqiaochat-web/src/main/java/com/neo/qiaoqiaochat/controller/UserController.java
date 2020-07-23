@@ -8,6 +8,7 @@ import com.neo.qiaoqiaochat.service.impl.UserServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+* 用户相关
+* @author linyi
+* @date 2020/7/23 14:42
+*/
 @RestController
 @RequestMapping("user")
 public class UserController {
@@ -48,7 +54,7 @@ public class UserController {
      * @remark 这里是备注信息
      * @number 1
      */
-    @RequestMapping("register")
+    @PostMapping("register")
     public SimpleResult register(@Valid @RequestBody UserRegisterDTO dto ){
         userService.userRegister(dto);
         return new SimpleResult();
@@ -69,7 +75,7 @@ public class UserController {
      * @remark 这里是备注信息
      * @number 2
      */
-    @RequestMapping(value = "friend/add")
+    @PostMapping(value = "friend/add")
     public SimpleResult addFriend(@Valid @RequestBody AddFriendDTO dto)  {
         userService.addFriend(dto);
         SimpleResult result = new SimpleResult();
@@ -90,7 +96,7 @@ public class UserController {
      * @remark 这里是备注信息
      * @number 3
      */
-    @RequestMapping("friend/confirm")
+    @PostMapping("friend/confirm")
     public SimpleResult confirmFriend(@Valid @RequestBody ConfirmFriendDTO dto) {
         userService.confirmAddFriend(dto);
         return new SimpleResult();
@@ -113,7 +119,7 @@ public class UserController {
      * @remark 这里是备注信息
      * @number 4
      */
-    @RequestMapping("friend/list")
+    @PostMapping("friend/list")
     public SimpleResult getFriendList(){
         SimpleResult<List> result = new SimpleResult<>();
         result.setData(userService.getFriendList());

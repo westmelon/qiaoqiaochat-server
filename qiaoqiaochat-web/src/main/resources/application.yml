@@ -6,7 +6,11 @@ server:
   tomcat:
     uri-encoding: utf-8
 
+
 spring:
+  mvc:
+    servlet:
+      path: /web
   application:
     name: web
   cloud:

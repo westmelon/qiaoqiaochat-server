@@ -14,6 +14,9 @@ server:
 
 
 spring:
+  mvc:
+    servlet:
+      path: /ws
   application:
     name: websocket
   cloud:

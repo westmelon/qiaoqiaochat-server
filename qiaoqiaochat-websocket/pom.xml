@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>qiaoqiaovhat-websocket</artifactId>
+    <artifactId>qiaoqiaochat-websocket</artifactId>
 
     <dependencies>
         <dependency>

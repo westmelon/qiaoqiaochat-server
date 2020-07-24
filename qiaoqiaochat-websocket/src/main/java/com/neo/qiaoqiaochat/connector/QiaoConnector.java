@@ -81,7 +81,6 @@ public class QiaoConnector implements QConnector {
     @Override
     public void serverPushMessage(MessageWrapper wrapper) {
         boolean writeSuccess = pushMessage(wrapper);
-        System.out.println(wrapper.getBody().toString());
         if (writeSuccess) {
             messageProxy.saveOnlineMessageToDB(wrapper);
         } else {
@@ -211,7 +210,7 @@ public class QiaoConnector implements QConnector {
         QiaoQiaoHua.Model received = wrapper.getBody();
         QiaoQiaoHua.Model.Builder builder = QiaoQiaoHua.Model.newBuilder();
         builder.setResponseId(received.getRequestId());
-        builder.setUniqueId(String.valueOf(idWorker.nextId()));
+        builder.setUniqueId(wrapper.getBody().getUniqueId());
         builder.setIdentifier(received.getIdentifier());
         builder.setReceiver(received.getReceiver());
         builder.setTextContent(received.getTextContent());

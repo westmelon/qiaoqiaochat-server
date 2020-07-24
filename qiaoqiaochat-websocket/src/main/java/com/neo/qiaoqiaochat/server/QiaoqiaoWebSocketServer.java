@@ -39,7 +39,7 @@ import java.util.List;
 
 import static io.netty.buffer.Unpooled.wrappedBuffer;
 
-//@Component
+@Component
 public class QiaoqiaoWebSocketServer {
 
     private static final Logger logger = LoggerFactory.getLogger(QiaoqiaoService.class);

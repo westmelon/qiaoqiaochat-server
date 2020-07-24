@@ -33,7 +33,6 @@ public class MessageProxyImpl implements MessageProxy {
 
     @Override
     public MessageWrapper createMessageWapper(String sessionId, QiaoQiaoHua.Model qiaoqiaohua) {
-        //todo 消息解密
         int cmd = qiaoqiaohua.getCmd();
         MiCommand miCommand = MiCommand.getEnumByCode(cmd);
         if (miCommand == null) {
@@ -116,7 +115,6 @@ public class MessageProxyImpl implements MessageProxy {
         builder.setMsgType(messageType.getCode());
         builder.setRequestId(UUID.randomUUID().toString());
         builder.setTimestamp(System.currentTimeMillis());
-        builder.setUniqueId(String.valueOf(idWorker.nextId()));
         builder.setEncryptionType(1);
         String sender = builder.getSender();
         String receiver = builder.getReceiver();

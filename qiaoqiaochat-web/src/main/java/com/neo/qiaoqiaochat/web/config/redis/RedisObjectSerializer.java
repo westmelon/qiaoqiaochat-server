@@ -1,4 +1,4 @@
-package com.neo.qiaoqiaochat.config.redis;
+package com.neo.qiaoqiaochat.web.config.redis;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.serializer.support.DeserializingConverter;

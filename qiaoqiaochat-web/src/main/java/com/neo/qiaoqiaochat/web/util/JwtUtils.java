@@ -1,8 +1,8 @@
-package com.neo.qiaoqiaochat.util;
+package com.neo.qiaoqiaochat.web.util;
 
-import com.neo.qiaoqiaochat.config.Audience;
-import com.neo.qiaoqiaochat.exception.BusinessException;
-import com.neo.qiaoqiaochat.model.ResultCode;
+import com.neo.qiaoqiaochat.web.config.Audience;
+import com.neo.qiaoqiaochat.web.exception.BusinessException;
+import com.neo.qiaoqiaochat.web.model.ResultCode;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

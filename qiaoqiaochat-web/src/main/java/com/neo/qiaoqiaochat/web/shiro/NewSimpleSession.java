@@ -1,4 +1,4 @@
-package com.neo.qiaoqiaochat.shiro;
+package com.neo.qiaoqiaochat.web.shiro;
 
 
 import org.apache.shiro.session.mgt.SimpleSession;

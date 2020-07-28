@@ -1,10 +1,8 @@
-package com.neo.qiaoqiaochat.model.domain;
+package com.neo.qiaoqiaochat.web.model.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.*;
 
 @Table(name = "friend")
 public class MiFriendModel implements Serializable {
@@ -31,6 +29,9 @@ public class MiFriendModel implements Serializable {
      */
     @Column(name = "msg_receive_setting")
     private Integer msgReceiveSetting;
+
+    @Column(name = "remark_name")
+    private String remarkName;
 
     /**
      * 成为好友时间
@@ -116,6 +117,20 @@ public class MiFriendModel implements Serializable {
     }
 
     /**
+     * @return remark_name
+     */
+    public String getRemarkName() {
+        return remarkName;
+    }
+
+    /**
+     * @param remarkName
+     */
+    public void setRemarkName(String remarkName) {
+        this.remarkName = remarkName;
+    }
+
+    /**
      * 获取成为好友时间
      *
      * @return create_time - 成为好友时间
@@ -157,6 +172,7 @@ public class MiFriendModel implements Serializable {
         sb.append(", fid=").append(fid);
         sb.append(", relationIndex=").append(relationIndex);
         sb.append(", msgReceiveSetting=").append(msgReceiveSetting);
+        sb.append(", remarkName=").append(remarkName);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);

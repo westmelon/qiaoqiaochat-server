@@ -1,4 +1,4 @@
-package com.neo.qiaoqiaochat.config.redis;
+package com.neo.qiaoqiaochat.web.config.redis;
 
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;

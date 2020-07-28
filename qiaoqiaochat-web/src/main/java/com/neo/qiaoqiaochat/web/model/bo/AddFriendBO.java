@@ -1,4 +1,4 @@
-package com.neo.qiaoqiaochat.model.bo;
+package com.neo.qiaoqiaochat.web.model.bo;
 
 
 import javax.validation.constraints.NotEmpty;

@@ -4,7 +4,7 @@ netty:
 
 
 mybatis:
-  type-aliases-package: com.neo.qiaoqiaochat.dao
+  mapper-locations: classpath*:mappers/*.xml
 
 server:
   port: 8080

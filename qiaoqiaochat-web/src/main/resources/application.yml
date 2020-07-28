@@ -1,5 +1,6 @@
 mybatis:
-  type-aliases-package: com.neo.qiaoqiaochat.dao
+#  type-aliases-package: com.neo.qiaoqiaochat.web.dao
+  mapper-locations: classpath*:mappers/*.xml
 
 server:
   port: 8081

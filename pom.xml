@@ -28,6 +28,9 @@
 
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+
+        <child-dependency-groupId>com.neo</child-dependency-groupId>
+        <child-dependency-artifactId>qiaoqiaochat-web</child-dependency-artifactId>
     </properties>
 
     <dependencyManagement>
@@ -113,6 +116,57 @@
 
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.mybatis.generator</groupId>
+                    <artifactId>mybatis-generator-maven-plugin</artifactId>
+                    <version>1.3.2</version>
+                    <configuration>
+                        <verbose>true</verbose>
+                        <overwrite>true</overwrite>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>tk.mybatis</groupId>
+                            <artifactId>mapper</artifactId>
+                            <version>4.0.1</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+                <plugin>
+                    <groupId>com.github.shalousun</groupId>
+                    <artifactId>smart-doc-maven-plugin</artifactId>
+                    <version>1.1.3</version>
+                    <configuration>
+                        <!--指定生成文档的使用的配置文件,配置文件放在自己的项目中-->
+                        <configFile>./smart-doc.json</configFile>
+                        <!--指定项目名称-->
+                        <projectName>测试</projectName>
+                        <!--smart-doc实现自动分析依赖树加载第三方依赖的源码，如果一些框架依赖库加载不到导致报错，这时请使用excludes排除掉-->
+                        <excludes>
+                            <!--格式为：groupId:artifactId;参考如下-->
+                            <exclude>com.alibaba:fastjson</exclude>
+                        </excludes>
+                        <!--自1.0.8版本开始，插件提供includes支持-->
+                        <!--smart-doc能自动分析依赖树加载所有依赖源码，原则上会影响文档构建效率，因此你可以使用includes来让插件加载你配置的组件-->
+                        <includes>
+                            <!--格式为：groupId:artifactId;参考如下-->
+                            <include>com.alibaba:fastjson</include>
+                        </includes>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <!--如果不需要在执行编译时启动smart-doc，则将phase注释掉-->
+                            <!--                        <phase>compile</phase>-->
+                            <goals>
+                                <goal>html</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -124,22 +178,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.mybatis.generator</groupId>
-                <artifactId>mybatis-generator-maven-plugin</artifactId>
-                <version>1.3.2</version>
-                <configuration>
-                    <verbose>true</verbose>
-                    <overwrite>true</overwrite>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>tk.mybatis</groupId>
-                        <artifactId>mapper</artifactId>
-                        <version>4.0.1</version>
-                    </dependency>
-                </dependencies>
             </plugin>
         </plugins>
 

@@ -8,7 +8,7 @@
         <version>0.0.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
+    <groupId>com.neo</groupId>
     <artifactId>qiaoqiaochat-web</artifactId>
 
     <dependencies>
@@ -120,15 +120,23 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
-        <dependency>
-            <groupId>io.github.yedaxia</groupId>
-            <artifactId>japidocs</artifactId>
-            <version>1.4.1</version>
-            <scope>test</scope>
-        </dependency>
-
     </dependencies>
 
-
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.github.shalousun</groupId>
+                <artifactId>smart-doc-maven-plugin</artifactId>
+                <configuration>
+                    <!--指定生成文档的使用的配置文件,配置文件放在自己的项目中-->
+                    <configFile>./src/main/resources/smart-doc.json</configFile>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

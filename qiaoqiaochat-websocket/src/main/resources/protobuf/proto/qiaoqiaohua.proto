@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option java_package = "com.neo.qiaoqiaochat.model.protobuf";
+option java_package = "com.neo.qiaoqiaochat.websocket.model.protobuf";
 option java_outer_classname = "QiaoQiaoHua";
 message Model {
   uint32 cmd = 1;

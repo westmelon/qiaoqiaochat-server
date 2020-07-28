@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.neo.qiaoqiaochat.dao.MiGroupUserRelationModelMapper" >
-  <resultMap id="BaseResultMap" type="com.neo.qiaoqiaochat.model.domain.MiGroupUserRelationModel" >
+<mapper namespace="com.neo.qiaoqiaochat.web.dao.MiGroupUserRelationModelMapper" >
+  <resultMap id="BaseResultMap" type="com.neo.qiaoqiaochat.web.model.domain.MiGroupUserRelationModel" >
     <!--
       WARNING - @mbg.generated
     -->

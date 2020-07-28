@@ -18,7 +18,7 @@
 
         <!-- 通用Mapper插件 -->
         <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
-            <property name="mappers" value="com.neo.qiaoqiaochat.util.SimpleMapper"/>
+            <property name="mappers" value="com.neo.qiaoqiaochat.websocket.util.SimpleMapper"/>
             <property name="style" value="lowercase"/>
 
         </plugin>
@@ -42,7 +42,7 @@
             targetPackage     指定生成的model生成所在的包名
             targetProject     指定在该项目下所在的路径
         -->
-        <javaModelGenerator targetPackage="com.neo.qiaoqiaochat.model.domain" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.neo.qiaoqiaochat.websocket.model.domain" targetProject="src/main/java">
             <!-- 是否对model添加 构造函数 -->
             <!--<property name="constructorBased" value="true"/>-->
 
@@ -70,7 +70,7 @@
                 type="MIXEDMAPPER",生成基于注解的Java Model 和相应的Mapper对象
                 type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口
         -->
-        <javaClientGenerator targetPackage="com.neo.qiaoqiaochat.dao" targetProject="src/main/java" type="XMLMAPPER">
+        <javaClientGenerator targetPackage="com.neo.qiaoqiaochat.websocket.dao" targetProject="src/main/java" type="XMLMAPPER">
             <property name="enableSubPackages" value="false"/>
             <!--
                     定义Maper.java 源代码中的ByExample() 方法的可视性，可选的值有：

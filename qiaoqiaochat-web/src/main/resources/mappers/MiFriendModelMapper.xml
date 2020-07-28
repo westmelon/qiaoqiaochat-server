@@ -1,15 +1,32 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.neo.qiaoqiaochat.dao.MiFriendModelMapper" >
-  <resultMap id="BaseResultMap" type="com.neo.qiaoqiaochat.model.domain.MiFriendModel" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neo.qiaoqiaochat.web.dao.MiFriendModelMapper">
+  <resultMap id="BaseResultMap" type="com.neo.qiaoqiaochat.web.model.domain.MiFriendModel">
     <!--
       WARNING - @mbg.generated
     -->
-    <id column="uid" property="uid" jdbcType="BIGINT" />
-    <id column="fid" property="fid" jdbcType="BIGINT" />
-    <result column="relation_index" property="relationIndex" jdbcType="TINYINT" />
-    <result column="msg_receive_setting" property="msgReceiveSetting" jdbcType="TINYINT" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <id column="uid" jdbcType="BIGINT" property="uid" />
+    <id column="fid" jdbcType="BIGINT" property="fid" />
+    <result column="relation_index" jdbcType="TINYINT" property="relationIndex" />
+    <result column="msg_receive_setting" jdbcType="TINYINT" property="msgReceiveSetting" />
+    <result column="remark_name" jdbcType="VARCHAR" property="remarkName" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+
+  <!--获取好友列表-->
+  <select id="getFriendList" resultType="com.neo.qiaoqiaochat.web.model.vo.FriendVO">
+    SELECT
+        u.account,
+        u.nick_name AS nickName,
+        f.remark_name AS remarkName,
+        u.head_image_index AS headImageIndex,
+        f.relation_index AS relationIndex,
+        f.msg_receive_setting AS msgReceiveSetting
+    FROM
+        friend f
+    INNER JOIN `user` u ON f.fid = u.id
+    WHERE
+        f.uid = #{uid}
+  </select>
 </mapper>

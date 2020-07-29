@@ -1,5 +1,6 @@
 package com.neo.qiaoqiaochat.web.controller;
 
+import com.neo.qiaoqiaochat.web.auth.UserAuth;
 import com.neo.qiaoqiaochat.web.model.SimpleResult;
 import com.neo.qiaoqiaochat.web.model.dto.AddFriendDTO;
 import com.neo.qiaoqiaochat.web.model.dto.ConfirmFriendDTO;
@@ -90,6 +91,7 @@ public class FriendController {
      * @since 0.0.1
      */
     @PostMapping("list")
+    @UserAuth
     public SimpleResult<ContactVO> getFriendList() {
         SimpleResult<ContactVO> result = new SimpleResult<>();
         result.setData(friendService.getFriendList());

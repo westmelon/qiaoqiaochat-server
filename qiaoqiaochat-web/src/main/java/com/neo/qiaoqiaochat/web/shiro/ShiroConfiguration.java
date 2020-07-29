@@ -19,7 +19,7 @@ import org.springframework.context.annotation.DependsOn;
 import javax.servlet.Filter;
 import java.util.*;
 
-@Configuration
+//@Configuration
 public class ShiroConfiguration {
 
 

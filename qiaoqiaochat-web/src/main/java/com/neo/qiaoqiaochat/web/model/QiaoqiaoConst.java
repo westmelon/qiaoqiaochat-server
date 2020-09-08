@@ -61,10 +61,7 @@ public class QiaoqiaoConst {
         String VIDEO = "13";
     }
 
-    public static interface ShiroConfig {
-        public static final String SALT = "2020520";
-        public static final String USER_INFO = "ui";
-    }
+
 
     public static interface RedisCacheConfig {
         public static final String NETTY_SESSION_NAMESPACE = "netty-session";

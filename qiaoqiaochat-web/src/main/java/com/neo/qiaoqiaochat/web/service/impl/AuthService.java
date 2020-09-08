@@ -1,32 +1,34 @@
 package com.neo.qiaoqiaochat.web.service.impl;
 
-import com.neo.qiaoqiaochat.web.config.Audience;
-import com.neo.qiaoqiaochat.web.config.redis.RedisCacheManager;
-import com.neo.qiaoqiaochat.web.exception.BusinessException;
-import com.neo.qiaoqiaochat.web.model.QiaoqiaoConst;
-import com.neo.qiaoqiaochat.web.model.ResultCode;
-import com.neo.qiaoqiaochat.web.model.vo.TokenVO;
-import com.neo.qiaoqiaochat.web.util.JwtUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.cache.Cache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.neo.qiaoqiaochat.web.config.Audience;
+import com.neo.qiaoqiaochat.web.config.redis.key.TokenKey;
+import com.neo.qiaoqiaochat.web.exception.BusinessException;
+import com.neo.qiaoqiaochat.web.model.ResultCode;
+import com.neo.qiaoqiaochat.web.model.vo.TokenVO;
+import com.neo.qiaoqiaochat.web.model.vo.UserAccountVO;
+import com.neo.qiaoqiaochat.web.redis.RedisService;
+import com.neo.qiaoqiaochat.web.util.JwtUtils;
 
 @Service
 public class AuthService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+
     @Autowired
-    private RedisCacheManager cacheManager;
+    private RedisService redisService;
 
     @Autowired
     private Audience audience;
 
 
-    public TokenVO getTokenVO(String account){
+    //todo
+    public TokenVO getTokenVO(String account) {
         TokenVO vo = new TokenVO();
         String token = getToken(account);
         vo.setToken(token);
@@ -35,52 +37,60 @@ public class AuthService {
 
     //验证token的有效性
     public TokenVO checkTokenValid(String token) {
-        Cache<String, String> cache = cacheManager.getCache(QiaoqiaoConst.RedisCacheConfig.ACCOUNT_TOKEN);
 
-        String account = JwtUtils.parseJWT(token, audience.getBase64Secret());
-        String cachedToken = cache.get(account);
-        logger.info("比较token，参数中的{}，缓存的{}",token,cachedToken);
+
+        UserAccountVO vo = JwtUtils.parseJWT(token, audience.getBase64Secret());
+        String account = vo.getAccount();
+        String tokenCached = redisService.get(new TokenKey(account));
+        logger.info("比较token，参数中的{}，缓存的{}", token, tokenCached);
+
         TokenVO tokenVo = new TokenVO();
-        if (!token.equals(cachedToken)) {
+        if (!token.equals(tokenCached)) {
             logger.info("token对比不一致");
             throw new BusinessException(ResultCode.ACCESS_DENIED);
         }
 
-        if(!tokenValid(token, account)){
-            logger.info("比较token，参数中的{}，缓存的{}",token,cachedToken);
-            throw new BusinessException(ResultCode.ACCESS_DENIED);
-        }
         tokenVo.setToken(token);
         tokenVo.setAccount(account);
         return tokenVo;
     }
 
-    private synchronized String getToken(String account){
+    private synchronized String getToken(String account) {
         boolean needFresh = false;
         //先从缓存中获取token 然后校验token的有效性 如果有效则返回token 无效则重新获取并放入缓存
-        Cache<String, String> cache = cacheManager.getCache(QiaoqiaoConst.RedisCacheConfig.ACCOUNT_TOKEN);
-        String cachedToken = cache.get(account);
-        if(StringUtils.isNotBlank(cachedToken)){
-            if(!tokenValid(cachedToken, account)){
+
+        String tokenCached = redisService.get(new TokenKey(account));
+
+        if (StringUtils.isNotBlank(tokenCached)) {
+            if (!tokenValid(tokenCached, account)) {
                 needFresh = true;
             }
-        }else{
+        } else {
             needFresh = true;
         }
-        if(!needFresh){
-            return cachedToken;
+        if (!needFresh) {
+            return tokenCached;
         }
-
+        // TODO: 2020/9/7  重新登陆？
         //生成新的token
-        String token = JwtUtils.buildJWT(account, audience );
-        cache.put(account, token);
-        return token;
+//        String token = JwtUtils.buildJWT(account, audience);
+//        redisService.set(new TokenKey(account), token);
+        return "";
     }
 
-    private boolean tokenValid(String token, String account){
-        String decode = JwtUtils.parseJWT(token, audience.getBase64Secret());
 
-        return decode.equals(account);
+    private boolean tokenValid(String cachedToken, String account) {
+        try {
+            UserAccountVO vo = JwtUtils.parseJWT(cachedToken, audience.getBase64Secret());
 
+            if (!account.equals(vo.getAccount())) {
+                return false;
+            }
+        } catch (Exception e) {
+            logger.error("token解密失敗", e);
+            return false;
+        }
+        return true;
     }
+
 }

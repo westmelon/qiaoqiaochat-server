@@ -43,14 +43,6 @@ public class RedisConfig {
         return template;
     }
 
-    @Bean(name = "sessionRedisTemplate")
-    public RedisTemplate<String, Object> redisTemplateForSession(RedisConnectionFactory factory) {
-        RedisTemplate<String, Object> template = new RedisTemplate<>();
-        template.setConnectionFactory(factory);
-        template.setKeySerializer(new StringRedisSerializer());
-        template.setValueSerializer(new RedisObjectSerializer());
-        return template;
-    }
 
 
 

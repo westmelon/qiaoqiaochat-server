@@ -31,6 +31,7 @@ public class UserAuthAspect {
 
     @Around("@annotation(userAuth)")
     public Object verifyAuth(ProceedingJoinPoint point, UserAuth userAuth) throws Throwable {
+
         RequestAttributes ra = RequestContextHolder.getRequestAttributes();
         ServletRequestAttributes sra = (ServletRequestAttributes) ra;
         HttpServletRequest request = sra.getRequest();

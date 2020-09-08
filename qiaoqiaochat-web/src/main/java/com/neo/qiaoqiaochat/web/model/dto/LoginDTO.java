@@ -1,5 +1,6 @@
 package com.neo.qiaoqiaochat.web.model.dto;
 
+import javax.validation.constraints.NotEmpty;
 import lombok.Data;
 
 /**
@@ -13,10 +14,12 @@ public class LoginDTO {
     /**
      * 账号
      */
+    @NotEmpty(message = "账号不能为空")
     private String account;
 
     /**
      * 密码
      */
+    @NotEmpty(message = "密码不能为空")
     private String password;
 }

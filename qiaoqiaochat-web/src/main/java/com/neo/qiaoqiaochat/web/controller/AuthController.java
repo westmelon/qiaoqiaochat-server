@@ -1,15 +1,7 @@
 package com.neo.qiaoqiaochat.web.controller;
 
 
-import com.neo.qiaoqiaochat.web.model.SimpleResult;
-import com.neo.qiaoqiaochat.web.model.dto.LoginDTO;
-import com.neo.qiaoqiaochat.web.model.vo.TokenVO;
-import com.neo.qiaoqiaochat.web.model.vo.UserAccountVO;
-import com.neo.qiaoqiaochat.web.service.impl.AuthService;
-import com.neo.qiaoqiaochat.web.service.impl.LoginService;
-import com.neo.qiaoqiaochat.web.util.ShiroUtils;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
+import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +9,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
+import com.neo.qiaoqiaochat.web.model.SimpleResult;
+import com.neo.qiaoqiaochat.web.model.dto.LoginDTO;
+import com.neo.qiaoqiaochat.web.model.vo.TokenVO;
+import com.neo.qiaoqiaochat.web.model.vo.UserAccountVO;
+import com.neo.qiaoqiaochat.web.service.impl.AuthService;
+import com.neo.qiaoqiaochat.web.service.impl.LoginService;
+import com.neo.qiaoqiaochat.web.util.UserUtils;
 
 /**
  * 权限相关
@@ -49,8 +46,7 @@ public class AuthController {
     public SimpleResult<TokenVO> login(@RequestBody @Valid LoginDTO dto) {
         //验证登录成功以后 把用户账号 和token放入缓存中
         loginService.login(dto);
-        loginService.doAfterLogin(dto.getAccount());
-        TokenVO tokenVO = authService.getTokenVO(dto.getAccount());
+        TokenVO tokenVO = loginService.doAfterLogin(dto.getAccount());
         SimpleResult<TokenVO> simpleResult = new SimpleResult<>();
         simpleResult.setData(tokenVO);
         return simpleResult;
@@ -66,7 +62,7 @@ public class AuthController {
         //验证登录成功以后 把用户账号 和token放入缓存中
         //key-account  value-token
         SimpleResult<TokenVO> result = new SimpleResult<>();
-        UserAccountVO user = ShiroUtils.getCurrentUser();
+        UserAccountVO user = UserUtils.getAccount();
         TokenVO tokenVO = authService.getTokenVO(user.getAccount());
         result.setData(tokenVO);
         return result;
@@ -80,8 +76,9 @@ public class AuthController {
      */
     @PostMapping("logout")
     public SimpleResult logout() {
-        Subject currentUser = SecurityUtils.getSubject();
-        currentUser.logout();
+        //todo
+//        Subject currentUser = SecurityUtils.getSubject();
+//        currentUser.logout();
 
         return new SimpleResult();
     }

@@ -1,5 +1,9 @@
 package com.neo.qiaoqiaochat.web.service.impl;
 
+import java.util.Date;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import com.neo.qiaoqiaochat.web.dao.MiUserModelMapper;
 import com.neo.qiaoqiaochat.web.exception.BusinessException;
 import com.neo.qiaoqiaochat.web.model.QiaoqiaoConst;
@@ -8,20 +12,14 @@ import com.neo.qiaoqiaochat.web.model.domain.MiUserModel;
 import com.neo.qiaoqiaochat.web.model.dto.UserRegisterDTO;
 import com.neo.qiaoqiaochat.web.model.vo.UserAccountVO;
 import com.neo.qiaoqiaochat.web.service.UserService;
-import com.neo.qiaoqiaochat.web.shiro.PasswordManager;
+import com.neo.qiaoqiaochat.web.util.PasswordUtils;
 import com.neo.qiaoqiaochat.web.util.SnowflakeIdWorker;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.Date;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
     private MiUserModelMapper miUserModelMapper;
-
 
 
     @Autowired
@@ -115,7 +113,7 @@ public class UserServiceImpl implements UserService {
         insert.setIntroduce(dto.getIntroduce());
         //加密密码
         Date now = new Date();
-        String secret = PasswordManager.instance().encryptPassword(dto.getPassword(), QiaoqiaoConst.ShiroConfig.SALT);
+        String secret = PasswordUtils.sin(dto.getPassword());
         insert.setPassword(secret);
         insert.setCreateTime(now);
         insert.setUpdateTime(now);

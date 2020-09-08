@@ -1,26 +1,24 @@
 package com.neo.qiaoqiaochat.web.service.impl;
 
-import com.google.gson.Gson;
-import com.neo.qiaoqiaochat.web.config.redis.RedisCacheManager;
-import com.neo.qiaoqiaochat.web.exception.BusinessException;
-import com.neo.qiaoqiaochat.web.model.QiaoqiaoConst;
-import com.neo.qiaoqiaochat.web.model.ResultCode;
-import com.neo.qiaoqiaochat.web.model.dto.LoginDTO;
-import com.neo.qiaoqiaochat.web.model.vo.UserAccountVO;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.ExcessiveAttemptsException;
-import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.cache.Cache;
-import org.apache.shiro.session.Session;
-import org.apache.shiro.subject.Subject;
+import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
+import org.springframework.util.StringUtils;
+import com.google.gson.Gson;
+import com.neo.qiaoqiaochat.web.config.Audience;
+import com.neo.qiaoqiaochat.web.config.redis.key.TokenKey;
+import com.neo.qiaoqiaochat.web.config.redis.key.UserKey;
+import com.neo.qiaoqiaochat.web.exception.BusinessException;
+import com.neo.qiaoqiaochat.web.model.ResultCode;
+import com.neo.qiaoqiaochat.web.model.domain.MiUserModel;
+import com.neo.qiaoqiaochat.web.model.dto.LoginDTO;
+import com.neo.qiaoqiaochat.web.model.vo.TokenVO;
+import com.neo.qiaoqiaochat.web.model.vo.UserAccountVO;
+import com.neo.qiaoqiaochat.web.redis.RedisService;
+import com.neo.qiaoqiaochat.web.util.JwtUtils;
+import com.neo.qiaoqiaochat.web.util.PasswordUtils;
 
 @Service
 public class LoginService {
@@ -28,64 +26,64 @@ public class LoginService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private RedisCacheManager cacheManager;
+    private RedisService redisService;
 
     @Autowired
     private UserServiceImpl userService;
 
+    @Autowired
+    private Audience audience;
+
+
     @Deprecated
-    public String login(String content){
+    public String login(String content) {
         LoginDTO loginDTO = new Gson().fromJson(content, LoginDTO.class);
 
-        String username = loginDTO.getAccount();
+        String account = loginDTO.getAccount();
         String password = loginDTO.getPassword();
-        logger.info("username-{},password-{}",username, password);
+        logger.info("account-{},password-{}", account, password);
 
-        //todo 生成token  丢进缓存 token为key 账号主体为value？
         String token = UUID.randomUUID().toString();
-        final Cache cache = cacheManager.getCache("token",1800);
-        cache.put(token, username);
+        redisService.set(new TokenKey(account), token);
 
         return token;
 
     }
 
-    public void login(LoginDTO dto){
+    public void login(LoginDTO dto) {
 
         String account = dto.getAccount();
         String password = dto.getPassword();
-        logger.info("account-{},password-{}",account, password);
-
-        UsernamePasswordToken token = new UsernamePasswordToken(account, password);
-        Subject currentUser = SecurityUtils.getSubject();
-        try {
-            currentUser.login(token);
-        }catch (ExcessiveAttemptsException e){
-            throw new BusinessException(ResultCode.PASSWORD_TRY_TOO_MUCH_TIME);
-        }catch (UnknownAccountException e){
+        logger.info("account-{},password-{}", account, password);
+        // TODO: 2020/9/7
+        MiUserModel savedAccount = userService.getUserByAccount(account);
+        if (savedAccount == null) {
             throw new BusinessException(ResultCode.ACCOUNT_NOT_FOUND);
-        }catch (AuthenticationException e) {
-            logger.error(e.toString(),e);
-                throw new BusinessException(ResultCode.PASSWORD_NOT_MATCH);
+        }
+        String savedPassword = savedAccount.getPassword();
+        String sin = PasswordUtils.sin(password);
+        if (StringUtils.isEmpty(sin) || StringUtils.isEmpty(savedPassword) || !sin.equals(savedPassword)) {
+            throw new BusinessException(ResultCode.PASSWORD_NOT_MATCH);
         }
 
-
-
+        return;
 
     }
 
-    public void doAfterLogin(String account){
+    public TokenVO doAfterLogin(String account) {
+
+        // TODO: 2020/9/7
         UserAccountVO user = userService.findUserByAccount(account);
-        Subject currentUser = SecurityUtils.getSubject();
-        Session session = currentUser.getSession();
-        //向session 存入用户信息
-        session.setAttribute(QiaoqiaoConst.ShiroConfig.USER_INFO, new Gson().toJson(user));
+        String token = JwtUtils.buildJWT(user, audience);
 
+        //用户信息放入缓存
+        redisService.set(new UserKey(account), user);
+        //token放入缓存
+        redisService.set(new TokenKey(account), token);
+
+        return TokenVO.builder().account(account).token(token).build();
 
 
     }
-
-
-
 
 }

@@ -1,6 +1,6 @@
 package com.neo.qiaoqiaochat.web.controller;
 
-import com.neo.qiaoqiaochat.web.model.SimpleResult;
+import com.neo.core.entity.SimpleResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;

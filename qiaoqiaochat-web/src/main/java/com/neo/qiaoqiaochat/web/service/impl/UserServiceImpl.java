@@ -1,19 +1,19 @@
 package com.neo.qiaoqiaochat.web.service.impl;
 
-import java.util.Date;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.neo.core.entity.ResultCode;
+import com.neo.core.exception.BusinessException;
+import com.neo.core.util.PasswordUtils;
+import com.neo.core.util.SnowflakeIdWorker;
 import com.neo.qiaoqiaochat.web.dao.MiUserModelMapper;
-import com.neo.qiaoqiaochat.web.exception.BusinessException;
-import com.neo.qiaoqiaochat.web.model.QiaoqiaoConst;
-import com.neo.qiaoqiaochat.web.model.ResultCode;
 import com.neo.qiaoqiaochat.web.model.domain.MiUserModel;
 import com.neo.qiaoqiaochat.web.model.dto.UserRegisterDTO;
 import com.neo.qiaoqiaochat.web.model.vo.UserAccountVO;
 import com.neo.qiaoqiaochat.web.service.UserService;
-import com.neo.qiaoqiaochat.web.util.PasswordUtils;
-import com.neo.qiaoqiaochat.web.util.SnowflakeIdWorker;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 @Service
 public class UserServiceImpl implements UserService {

@@ -1,7 +1,7 @@
 package com.neo.qiaoqiaochat.web.controller;
 
-import com.neo.qiaoqiaochat.web.auth.UserAuth;
-import com.neo.qiaoqiaochat.web.model.SimpleResult;
+import com.neo.core.auth.UserAuth;
+import com.neo.core.entity.SimpleResult;
 import com.neo.qiaoqiaochat.web.model.dto.AddFriendDTO;
 import com.neo.qiaoqiaochat.web.model.dto.ConfirmFriendDTO;
 import com.neo.qiaoqiaochat.web.model.dto.SearchUserDTO;

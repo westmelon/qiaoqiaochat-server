@@ -1,6 +1,6 @@
 package com.neo.qiaoqiaochat.web.controller;
 
-import com.neo.qiaoqiaochat.web.model.SimpleResult;
+import com.neo.core.entity.SimpleResult;
 import com.neo.qiaoqiaochat.web.model.dto.UserRegisterDTO;
 import com.neo.qiaoqiaochat.web.service.impl.UserServiceImpl;
 import org.slf4j.Logger;

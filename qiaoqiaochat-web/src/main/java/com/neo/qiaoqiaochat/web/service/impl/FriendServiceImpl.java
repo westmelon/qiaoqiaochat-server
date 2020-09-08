@@ -1,16 +1,13 @@
 package com.neo.qiaoqiaochat.web.service.impl;
 
-import java.util.Date;
-import java.util.List;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.neo.core.auth.UserUtils;
+import com.neo.core.entity.ResultCode;
+import com.neo.core.entity.UserParam;
+import com.neo.core.exception.BusinessException;
 import com.neo.qiaoqiaochat.web.dao.MiFriendModelMapper;
 import com.neo.qiaoqiaochat.web.dao.MiGroupModelMapper;
 import com.neo.qiaoqiaochat.web.dao.MiUserModelMapper;
-import com.neo.qiaoqiaochat.web.exception.BusinessException;
 import com.neo.qiaoqiaochat.web.model.QiaoqiaoConst;
-import com.neo.qiaoqiaochat.web.model.ResultCode;
 import com.neo.qiaoqiaochat.web.model.bo.AddFriendBO;
 import com.neo.qiaoqiaochat.web.model.bo.ConfirmFriendBO;
 import com.neo.qiaoqiaochat.web.model.domain.MiFriendModel;
@@ -24,7 +21,12 @@ import com.neo.qiaoqiaochat.web.model.vo.SearchUserVO;
 import com.neo.qiaoqiaochat.web.model.vo.UserAccountVO;
 import com.neo.qiaoqiaochat.web.service.FriendService;
 import com.neo.qiaoqiaochat.web.service.UserService;
-import com.neo.qiaoqiaochat.web.util.UserUtils;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * 好友相关服务层实现
@@ -66,7 +68,7 @@ public class FriendServiceImpl implements FriendService {
         }
         //校验好友关系 如果已经添加则返回提示信息 如果已经有添加记录则提示等待
         Long targetUserId = miUserModel.getId();
-        UserAccountVO accountVO = UserUtils.getAccount();
+        UserParam accountVO = UserUtils.getAccount();
         Long userId = accountVO.getId();
         MiFriendModel friendRelation = getFriendRelation(userId, targetUserId);
         if (friendRelation != null) {
@@ -102,7 +104,7 @@ public class FriendServiceImpl implements FriendService {
         if (miUserModel == null) {
             throw new BusinessException(ResultCode.ACCOUNT_NOT_FOUND);
         }
-        UserAccountVO currentUser = UserUtils.getAccount();
+        UserParam currentUser = UserUtils.getAccount();
         Long targetUserId = miUserModel.getId();
         Long userId = currentUser.getId();
         MiFriendModel friendRelation = getFriendRelation(targetUserId, userId);

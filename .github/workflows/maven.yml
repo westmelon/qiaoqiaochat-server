@@ -26,7 +26,7 @@ jobs:
         repositories: '[{ "id": "central", "name": "central", "url": "http://central", "releases": { "enabled": "true" }, "snapshots": { "enabled": "true" } },{ "id": "nexus_self", "name": "Nexus", "url": "http://124.70.210.202:9001/repository/maven-public/", "releases": { "enabled": "true" }, "snapshots": { "enabled": "true" } }]'
         plugin_repositories: '[{ "id": "central", "name": "central", "url": "http://central", "releases": { "enabled": "true" }, "snapshots": { "enabled": "true" }}, { "id": "nexus_self", "name": "Nexus", "url": "http://124.70.210.202:9001/repository/maven-public/", "releases": { "enabled": "true" }, "snapshots": { "enabled": "true" }}]'
         servers: '[{ "id": "nexus_self", "username": "admin", "password": "freefall-6Fief-4goatskin-klutz6-Ale1" }]'
-        mirrors: '[{ "id": "nexus_self", "mirrorOf": "*", "url": "http://124.70.210.202:9001/repository/maven-public" }]'
+        mirrors: '[{ "id": "nexus_self", "mirrorOf": "nexus_self", "url": "http://124.70.210.202:9001/repository/maven-public" }]'
     - name: Build with Maven
       run: mvn -B package --file pom.xml -Dmaven.test.skip=true
     - name: build docker image

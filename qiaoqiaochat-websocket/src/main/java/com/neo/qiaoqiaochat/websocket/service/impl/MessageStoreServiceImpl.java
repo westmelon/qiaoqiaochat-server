@@ -1,6 +1,11 @@
 package com.neo.qiaoqiaochat.websocket.service.impl;
-import java.util.Date;
 
+import java.util.Date;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.neo.core.util.SnowflakeIdWorker;
 import com.neo.qiaoqiaochat.websocket.dao.MiMessageContentModelMapper;
 import com.neo.qiaoqiaochat.websocket.dao.MiMessageHistoryModelMapper;
 import com.neo.qiaoqiaochat.websocket.dao.MiMessageOfflineModelMapper;
@@ -10,11 +15,6 @@ import com.neo.qiaoqiaochat.websocket.model.domain.MiMessageContentModel;
 import com.neo.qiaoqiaochat.websocket.model.domain.MiMessageOfflineModel;
 import com.neo.qiaoqiaochat.websocket.model.protobuf.QiaoQiaoHua;
 import com.neo.qiaoqiaochat.websocket.service.MessageStoreService;
-import com.neo.qiaoqiaochat.websocket.util.SnowflakeIdWorker;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service
 public class MessageStoreServiceImpl implements MessageStoreService {

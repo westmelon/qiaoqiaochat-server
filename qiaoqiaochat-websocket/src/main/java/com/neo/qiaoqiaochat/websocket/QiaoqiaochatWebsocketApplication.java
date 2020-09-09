@@ -1,11 +1,13 @@
 package com.neo.qiaoqiaochat.websocket;
 
-import com.neo.qiaoqiaochat.websocket.util.SnowflakeIdWorker;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import com.neo.core.util.SnowflakeIdWorker;
 
 @SpringBootApplication
+@ComponentScan({"com.neo.**"})
 public class QiaoqiaochatWebsocketApplication {
 
     public static void main(String[] args) {

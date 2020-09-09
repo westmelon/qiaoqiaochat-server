@@ -1,5 +1,14 @@
 package com.neo.qiaoqiaochat.websocket.connector;
 
+import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
+import com.neo.core.entity.TokenVO;
+import com.neo.core.service.AuthService;
+import com.neo.core.util.SnowflakeIdWorker;
 import com.neo.qiaoqiaochat.websocket.model.MessageWrapper;
 import com.neo.qiaoqiaochat.websocket.model.QiaoqiaoConst;
 import com.neo.qiaoqiaochat.websocket.model.bo.AddFriendBO;
@@ -7,21 +16,11 @@ import com.neo.qiaoqiaochat.websocket.model.bo.ConfirmFriendBO;
 import com.neo.qiaoqiaochat.websocket.model.emun.MiCommand;
 import com.neo.qiaoqiaochat.websocket.model.emun.MiMessageType;
 import com.neo.qiaoqiaochat.websocket.model.protobuf.QiaoQiaoHua;
-import com.neo.qiaoqiaochat.websocket.model.vo.TokenVO;
 import com.neo.qiaoqiaochat.websocket.proxy.MessageProxy;
-import com.neo.qiaoqiaochat.websocket.service.impl.AuthService;
-import com.neo.qiaoqiaochat.websocket.session.Session;
 import com.neo.qiaoqiaochat.websocket.session.NettySessionManager;
+import com.neo.qiaoqiaochat.websocket.session.Session;
 import com.neo.qiaoqiaochat.websocket.session.SessionProxy;
-import com.neo.qiaoqiaochat.websocket.util.SnowflakeIdWorker;
 import io.netty.channel.ChannelHandlerContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
-
-import java.util.List;
 
 @Component
 public class QiaoConnector implements QConnector {

@@ -19,14 +19,5 @@ public class WebMvcConfigurer extends WebMvcConfigurationSupport {
     }
 
 
-    /**
-     * 初始化应用
-     * @return
-     */
-    @Bean(initMethod = "init")
-    public InitApp initializeService(){
-        return new InitApp();
-    }
-
 
 }

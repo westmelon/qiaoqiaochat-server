@@ -1,5 +1,12 @@
 package com.neo.qiaoqiaochat.websocket.proxy.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
+import com.neo.core.util.SnowflakeIdWorker;
 import com.neo.qiaoqiaochat.websocket.model.MessageWrapper;
 import com.neo.qiaoqiaochat.websocket.model.emun.MiCommand;
 import com.neo.qiaoqiaochat.websocket.model.emun.MiMessageType;
@@ -8,14 +15,6 @@ import com.neo.qiaoqiaochat.websocket.proxy.MessageProxy;
 import com.neo.qiaoqiaochat.websocket.service.MessageStoreService;
 import com.neo.qiaoqiaochat.websocket.service.UserService;
 import com.neo.qiaoqiaochat.websocket.session.NettySessionManager;
-import com.neo.qiaoqiaochat.websocket.util.SnowflakeIdWorker;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 @Component
 public class MessageProxyImpl implements MessageProxy {

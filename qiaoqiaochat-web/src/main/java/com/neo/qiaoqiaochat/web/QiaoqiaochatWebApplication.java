@@ -1,15 +1,15 @@
 package com.neo.qiaoqiaochat.web;
 
-import com.neo.core.util.SnowflakeIdWorker;
-import com.neo.core.util.SpringUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import com.neo.core.util.SnowflakeIdWorker;
+import com.neo.core.util.SpringUtils;
 
 @SpringBootApplication
-@ComponentScan({"com.neo.core","com.neo.qiaoqiaochat.web"})
+@ComponentScan({"com.neo.**"})
 public class QiaoqiaochatWebApplication {
 
     public static void main(String[] args) {

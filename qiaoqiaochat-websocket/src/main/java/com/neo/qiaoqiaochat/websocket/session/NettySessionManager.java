@@ -1,23 +1,21 @@
 package com.neo.qiaoqiaochat.websocket.session;
 
 
-import com.neo.qiaoqiaochat.websocket.cache.LocalCache;
-import com.neo.qiaoqiaochat.websocket.config.InitApp;
-import com.neo.qiaoqiaochat.websocket.config.redis.RedisCache;
-import com.neo.qiaoqiaochat.websocket.config.redis.RedisCacheManager;
-import com.neo.qiaoqiaochat.websocket.model.MessageWrapper;
-import com.neo.qiaoqiaochat.websocket.model.QiaoqiaoConst;
-import io.netty.channel.ChannelHandlerContext;
-import org.apache.shiro.cache.Cache;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
-
-import java.util.*;
+import com.neo.core.redis.RedisService;
+import com.neo.qiaoqiaochat.websocket.cache.LocalCache;
+import com.neo.qiaoqiaochat.websocket.model.MessageWrapper;
+import com.neo.qiaoqiaochat.websocket.model.key.NettySessionIdKey;
+import io.netty.channel.ChannelHandlerContext;
 
 @Component
-@ConditionalOnBean(InitApp.class)
 public class NettySessionManager {
 
     /**
@@ -28,12 +26,12 @@ public class NettySessionManager {
     /**
      * 用户账号与netty session列表对应关系
      */
-    private final Cache<String, Set<String>> accountSessionIdsCache;
-
+//    private final Cache<String, Set<String>> accountSessionIdsCache;
     @Autowired
-    public NettySessionManager(RedisCacheManager cacheManager) {
+    private RedisService redisService;
+
+    public NettySessionManager() {
         sessionCache = new LocalCache();
-        accountSessionIdsCache = cacheManager.getCache(QiaoqiaoConst.RedisCacheConfig.ACCOUNT_SESSIONIDS);
 
     }
 
@@ -41,7 +39,7 @@ public class NettySessionManager {
      * 添加netty session
      *
      * @param sessionId the session id
-     * @param session   the session
+     * @param session the session
      */
     public synchronized void addSession(String sessionId, Session session) {
         sessionCache.put(sessionId, session);
@@ -75,11 +73,12 @@ public class NettySessionManager {
             //更新用户在线设备列表
             String account = session.getAccount();
             synchronized (this) {
-                Set<String> userSessions = accountSessionIdsCache.get(account);
+                Set userSessions = redisService.get(new NettySessionIdKey(account));
+//                Set<String> userSessions = accountSessionIdsCache.get(account);
                 if (!CollectionUtils.isEmpty(userSessions)) {
                     userSessions.remove(sessionId);
                 }
-                accountSessionIdsCache.put(account, userSessions);
+                redisService.set(new NettySessionIdKey(account), userSessions);
             }
         }
     }
@@ -124,26 +123,28 @@ public class NettySessionManager {
      * @return 账号的session列表
      */
     public List<String> getSessionIdsByAccount(String account) {
-        Set<String> userSessions = accountSessionIdsCache.get(account);
+
+        Set userSessions = redisService.get(new NettySessionIdKey(account));
         return CollectionUtils.isEmpty(userSessions) ? null : new ArrayList<>(userSessions);
     }
 
     /**
      * 绑定账号和session列表 同步处理
      *
-     * @param account   账号
+     * @param account 账号
      * @param sessionId the session id
      */
     public synchronized void bindSessionIdsToAccount(String account, String sessionId) {
-        Set<String> sessionIds = accountSessionIdsCache.get(account);
+
+        Set sessionIds = redisService.get(new NettySessionIdKey(account));
         if (CollectionUtils.isEmpty(sessionIds)) {
             sessionIds = new HashSet<>();
         }
         sessionIds.add(sessionId);
-        accountSessionIdsCache.put(account, sessionIds);
+        redisService.set(new NettySessionIdKey(account), sessionIds);
     }
 
-    public Map<String, Set<String>> getUserSessionMapping() {
-        return ((RedisCache)accountSessionIdsCache).mapValues();
-    }
+//    public Map<String, Set<String>> getUserSessionMapping() {
+//        return ((RedisCache)accountSessionIdsCache).mapValues();
+//    }
 }

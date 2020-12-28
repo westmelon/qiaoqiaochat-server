@@ -6,8 +6,6 @@ package com.neo.qiaoqiaochat.web;
 public class Test1 {
 
     //
-    private String
-            aa;
-
+    private String aa;
 
 }
